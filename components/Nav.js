@@ -17,7 +17,7 @@ export const Nav = () => {
           </a>
         </Link>
 
-        <ul className="flex items-center hidden space-x-8 lg:flex">
+        <ul className="flex items-center space-x-8 lg:flex">
           <li>
             <a
               href="/algorithm"
@@ -30,7 +30,7 @@ export const Nav = () => {
           </li>
           <li>
             <a
-              href="/store"
+              href="/market"
               aria-label="Our product"
               title="Our product"
               className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
