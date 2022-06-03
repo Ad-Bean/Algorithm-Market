@@ -56,7 +56,7 @@ function store() {
               <div className="mt-1 mb-4 mr-1 text-4xl font-bold sm:text-5xl">$12</div>
             </div>
             <a
-              href="/"
+              href="#"
               className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
             >
               Buy Basic
