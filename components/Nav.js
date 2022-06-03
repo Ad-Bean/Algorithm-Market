@@ -9,7 +9,7 @@ export const Nav = () => {
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div className="relative flex items-center justify-between">
         <Link href="/">
-          <a aria-label="Company" title="Company" className="inline-flex items-center">
+          <a className="inline-flex items-center">
             <Icon />
             <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
               算法超市
@@ -19,54 +19,43 @@ export const Nav = () => {
 
         <ul className="flex items-center space-x-8 lg:flex">
           <li>
-            <a
-              href="/algorithm"
-              aria-label="Our product"
-              title="Our product"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              算法
-            </a>
+            <Link href="/algorithm">
+              <a className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
+                算法
+              </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/market"
-              aria-label="Our product"
-              title="Our product"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              超市
-            </a>
+            <Link href="/market">
+              <a className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
+                超市
+              </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/pricing"
-              aria-label="Product pricing"
-              title="Product pricing"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              价格
-            </a>
+            <Link href="/pricing">
+              <a className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
+                价格
+              </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/about"
-              aria-label="About us"
-              title="About us"
-              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-            >
-              关于我们
-            </a>
+            <Link href="/about">
+              <a className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
+                关于我们
+              </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/signup"
-              className="inline-flex items-center justify-center h-8 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-              aria-label="Sign up"
-              title="Sign up"
-            >
-              注册
-            </a>
+            <Link href="/signup">
+              <a
+                className="inline-flex items-center justify-center h-8 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                aria-label="Sign up"
+                title="Sign up"
+              >
+                注册
+              </a>
+            </Link>
           </li>
         </ul>
         <div className="lg:hidden">

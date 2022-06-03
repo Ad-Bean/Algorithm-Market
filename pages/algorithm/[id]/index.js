@@ -34,7 +34,10 @@ const Post = () => {
   return (
     <>
       {message ? <SnackBar message={message} /> : null}
-      <article className="max-w-2xl px-6 py-24 mx-auto space-y-16  dark:text-black">
+      <article
+        onClick={closeSnackBar}
+        className="max-w-2xl px-6 py-24 mx-auto space-y-16  dark:text-black"
+      >
         <div className="w-full mx-auto space-y-4">
           <h1 className="text-5xl font-bold leading-none">{algo ? algo.name : ""}</h1>
           <div className="flex flex-wrap space-x-2 text-sm dark:text-gray-700">
@@ -46,14 +49,11 @@ const Post = () => {
           </div>
           <p className="text-sm dark:text-black">
             by
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline dark:text-violet-400"
-            >
-              <span> Leroy Jenkins </span>
-            </a>
+            <Link href="#" target="_blank" rel="noopener noreferrer">
+              <a className="hover:underline dark:text-violet-400">
+                <span> Leroy Jenkins </span>
+              </a>
+            </Link>
             on
             <time dateTime="2021-02-12 15:34:18-0200">Feb 12th 2021</time>
           </p>

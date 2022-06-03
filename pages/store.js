@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 function store() {
@@ -41,7 +42,7 @@ function store() {
       <div className="grid max-w-md gap-10 row-gap-8 lg:max-w-screen-lg sm:row-gap-10 lg:grid-cols-3 xl:max-w-screen-lg sm:mx-auto">
         <div className="flex flex-col transition duration-300 bg-white rounded shadow-sm hover:shadow">
           <div className="relative w-full h-48">
-            <img
+            <Image
               src="https://images.pexels.com/photos/3184305/pexels-photo-3184305.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
               className="object-cover w-full h-full rounded-t"
               alt="Plan"
@@ -65,7 +66,7 @@ function store() {
         </div>
         <div className="flex flex-col transition duration-300 bg-white rounded shadow-sm hover:shadow">
           <div className="relative w-full h-48">
-            <img
+            <Image
               src="https://images.pexels.com/photos/3183181/pexels-photo-3183181.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
               className="object-cover w-full h-full rounded-t"
               alt="Plan"
@@ -89,7 +90,7 @@ function store() {
         </div>
         <div className="flex flex-col transition duration-300 bg-white rounded shadow-sm hover:shadow">
           <div className="relative w-full h-48">
-            <img
+            <Image
               src="https://images.pexels.com/photos/3182743/pexels-photo-3182743.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
               className="object-cover w-full h-full rounded-t"
               alt="Plan"

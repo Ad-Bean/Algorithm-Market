@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default function algorithm() {
@@ -18,10 +19,10 @@ export default function algorithm() {
           iusto, provident qui nam dolorum corporis.&quot;
         </p>
         <div className="flex justify-center space-x-3">
-          <img
+          <Image
             src="https://source.unsplash.com/80x80/?portrait?1"
             alt=""
-            className="w-20 h-20 bg-center bg-cover rounded-md dark:bg-gray-500 dark:bg-gray-700"
+            className="w-20 h-20 bg-center bg-cover rounded-md dark:bg-gray-700"
           />
           <div>
             <p className="leading-tight">Leroy Jenkins</p>
