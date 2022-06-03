@@ -15,13 +15,15 @@ function Card(props) {
       className="duration-300 transform bg-white  hover:-translate-y-2
     max-w-xs rounded-md shadow-md dark:bg-white dark:text-black"
     >
-      <Image
-        src="https://source.unsplash.com/random/300x300/?2"
-        alt="picture"
-        width={100}
-        height={100}
-        className="object-cover object-center mx-auto w-full rounded-t-md h-72 dark:bg-gray-500"
-      />
+      <div className="flex justify-center items-center justify-items-center object-cover object-center mx-auto w-full rounded-t-md ">
+        <Image
+          src={`https://source.unsplash.com/random/300x300/?${id}`}
+          alt="picture"
+          width={200}
+          height={200}
+          className="text-center  dark:bg-gray-100"
+        />
+      </div>
 
       <div className="shadow-sm flex flex-col justify-between p-6 space-y-8">
         <div className="space-y-2">

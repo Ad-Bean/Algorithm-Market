@@ -3,6 +3,7 @@ import Card from "./Card";
 import Badget from "./icons/Badget";
 import SnackBar from "./SnackBar";
 import { getList } from "../pages/api/api";
+import Link from "next/link";
 
 export const Content = () => {
   const [items, setItems] = useState(null);
@@ -71,12 +72,11 @@ export const Content = () => {
         </div>
 
         <div className="text-center">
-          <a
-            href="#"
-            className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-          >
-            Learn more
-          </a>
+          <Link href="/market">
+            <a className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
+              Learn more
+            </a>
+          </Link>
         </div>
       </div>
     </>

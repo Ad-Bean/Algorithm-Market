@@ -22,6 +22,8 @@ export default function algorithm() {
           <Image
             src="https://source.unsplash.com/80x80/?portrait?1"
             alt=""
+            width={100}
+            height={100}
             className="w-20 h-20 bg-center bg-cover rounded-md dark:bg-gray-700"
           />
           <div>
