@@ -53,5 +53,5 @@ jobs:
           port: '${{ secrets.SERVER_PORT }}'
           server: '${{ secrets.SERVER_IP }}' 
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          local_path: './build/*'  
+          local_path: './out/*'  
           remote_path: '/home/${{ secrets.SERVER_USERNAME }}/Algorithm-Market-Frontend/build/'
