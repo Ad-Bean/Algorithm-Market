@@ -1,6 +1,12 @@
+## SYSU Algorithm Market
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+The design framework is [TailwindCSS](https://tailwindcss.com/), which is highly responsive and can help you build websites rapidly. I also use lots of open-source UI component libraries based on TailwindCSS such as [Mamba UI](https://mambaui.com/), [Kitwind](https://kitwind.io/) etc.
+
 ## Preview
+
+WIP
 
 ## Getting Started
 
