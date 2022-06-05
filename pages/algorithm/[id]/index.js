@@ -60,7 +60,7 @@ const Post = () => {
             <div className="flex items-center md:space-x-2">
               <Image
                 src="https://avatars.githubusercontent.com/u/32431960?v=4"
-                crossorigin="anonymous"
+                crossorigin=""
                 alt="portrait"
                 width={16}
                 height={16}
