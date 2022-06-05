@@ -36,7 +36,7 @@ const Post = () => {
   };
 
   return (
-    <div onClick={closeSnackBar} className="max-w-2xl px-6 py-12 mx-auto space-y-12">
+    <div onClick={closeSnackBar} className="max-w-2xl px-6 py-10 mx-auto space-y-12">
       {message ? <SnackBar message={message} /> : null}
       <article className="space-y-8 dark:text-black">
         <div className="space-y-6">
