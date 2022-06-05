@@ -34,7 +34,7 @@ function Card(props) {
         <button
           type="button"
           onClick={readMore}
-          className="flex items-center justify-center w-full p-2 font-semibold tracking-wide rounded-md dark:bg-violet-400 dark:text-gray-100"
+          className="transition duration-200 hover:bg-violet-700 flex items-center justify-center w-full p-2 font-semibold tracking-wide rounded-md dark:bg-violet-400 dark:text-gray-100"
         >
           阅读
         </button>

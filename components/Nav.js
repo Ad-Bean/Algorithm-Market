@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Nav = () => {
   return (
-    <div className="h-16 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+    <div className="sticky top-0 z-50 h-16 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
       <div className="relative flex items-center justify-between">
         <Link href="/">
           <a className="inline-flex items-center">
@@ -39,18 +39,18 @@ export const Nav = () => {
           <li>
             <Link href="/about">
               <a className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400">
-                关于我们
+                关于
               </a>
             </Link>
           </li>
           <li>
-            <Link href="/signup">
+            <Link href="/signin">
               <a
                 className="inline-flex items-center justify-center h-8 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                aria-label="Sign up"
-                title="Sign up"
+                aria-label="Sign in"
+                title="Sign in"
               >
-                注册
+                登录
               </a>
             </Link>
           </li>

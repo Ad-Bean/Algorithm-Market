@@ -22,7 +22,7 @@ export async function getInput(id) {
   return response.data.data;
 }
 
-export async function getOutput(id) {
-  const response = await API.get(`items/${id}/inputs`);
+export async function getOutput(itemId, inputId) {
+  const response = await API.get(`items/${itemId}/inputs/${inputId}/output`);
   return response.data.data;
 }

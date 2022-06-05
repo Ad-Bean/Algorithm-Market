@@ -6,7 +6,7 @@ The design framework is [TailwindCSS](https://tailwindcss.com/), which is highly
 
 ## Preview
 
-WIP
+![](https://pic.imgdb.cn/item/629c9e6d09475431290623c9.png)
 
 ## Getting Started
 

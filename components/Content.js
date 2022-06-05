@@ -36,7 +36,7 @@ export const Content = () => {
       {message ? <SnackBar message={message} /> : null}
       <div
         onClick={closeSnackBar}
-        className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+        className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
       >
         <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
           <div>
@@ -70,9 +70,9 @@ export const Content = () => {
             })}
         </div>
 
-        <div className="text-center">
+        <div className="text-center mt-12">
           <Link href="/market">
-            <a className=" transform hover:-translate-y-0.5 inline-flex items-center justify-center w-full h-10 px-8 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
+            <a className="transform hover:-translate-y-0.5 inline-flex items-center justify-center w-full h-10 px-8 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
               查看更多
             </a>
           </Link>

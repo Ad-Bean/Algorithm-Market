@@ -13,6 +13,8 @@ const Post = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    if (!id) return;
+
     const getItems = async () => {
       try {
         const ret = await getItem(id);
@@ -34,7 +36,7 @@ const Post = () => {
   };
 
   return (
-    <div onClick={closeSnackBar} className="max-w-2xl px-6 py-16 mx-auto space-y-12">
+    <div onClick={closeSnackBar} className="max-w-2xl px-6 py-12 mx-auto space-y-12">
       {message ? <SnackBar message={message} /> : null}
       <article className="space-y-8 dark:text-black">
         <div className="space-y-6">
@@ -78,21 +80,11 @@ const Post = () => {
       </article>
       <footer>
         <div className="space-y-2 py-4 space-x-2 border-t border-dashed dark:border-gray-400">
-          <h4 className="text-lg font-semibold">Related posts</h4>
+          <h4 className="text-lg font-semibold">相关算法</h4>
           <ul className="ml-4 space-y-1 list-disc">
             <li>
               <a rel="noopener noreferrer" href="#" className="hover:underline">
-                Nunc id magna mollis
-              </a>
-            </li>
-            <li>
-              <a rel="noopener noreferrer" href="#" className="hover:underline">
-                Duis molestie, neque eget pretium lobortis
-              </a>
-            </li>
-            <li>
-              <a rel="noopener noreferrer" href="#" className="hover:underline">
-                Mauris nec urna volutpat, aliquam lectus sit amet
+                Others
               </a>
             </li>
           </ul>
