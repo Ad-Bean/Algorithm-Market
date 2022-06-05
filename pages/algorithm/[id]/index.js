@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { getItem } from "../../api/api";
-import SnackBar from "../../../components/SnackBar";
+import { getItem } from "@api/api";
+import SnackBar from "@components/SnackBar";
 
 const Post = () => {
   const router = useRouter();

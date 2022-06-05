@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "https://market.lanly.vip/api/";
+export const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_ENV_VARIABLE;
 
 const API = axios.create({
   baseURL: baseUrl,
