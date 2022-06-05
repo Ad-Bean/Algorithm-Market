@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getItem } from "@api/api";
 import SnackBar from "@components/SnackBar";
+import Image from "next/image";
+import ItemInput from "@components/ItemInput";
 
 const Post = () => {
   const router = useRouter();
@@ -32,39 +34,71 @@ const Post = () => {
   };
 
   return (
-    <>
+    <div onClick={closeSnackBar} className="max-w-2xl px-6 py-16 mx-auto space-y-12">
       {message ? <SnackBar message={message} /> : null}
-      <article
-        onClick={closeSnackBar}
-        className="max-w-2xl px-6 py-24 mx-auto space-y-16  dark:text-black"
-      >
-        <div className="w-full mx-auto space-y-4">
-          <h1 className="text-5xl font-bold leading-none">{algo ? algo.name : ""}</h1>
-          <div className="flex flex-wrap space-x-2 text-sm dark:text-gray-700">
-            {algo?.tag.map((t, idx) => (
-              <a key={idx} rel="noopener noreferrer" href="#" className="p-1 hover:underline">
-                #{t}
-              </a>
-            ))}
+      <article className="space-y-8 dark:text-black">
+        <div className="space-y-6">
+          <h1 className="text-4xl font-bold md:tracking-tight md:text-5xl">{algo?.name}</h1>
+          <div className="flex flex-wrap space-x-2 ">
+            {algo &&
+              algo.tag.map((t, idx) => {
+                return (
+                  <Link key={idx} href="#">
+                    <a
+                      rel="noopener noreferrer"
+                      className="text-sm px-3 py-1 rounded-sm hover:underline dark:bg-violet-400 dark:text-gray-200"
+                    >
+                      #{t}
+                    </a>
+                  </Link>
+                );
+              })}
           </div>
-          <p className="text-sm dark:text-black">
-            by
-            <Link href="#" target="_blank" rel="noopener noreferrer">
-              <a className="hover:underline dark:text-violet-400">
-                <span> Leroy Jenkins </span>
-              </a>
-            </Link>
-            on
-            <time dateTime="2021-02-12 15:34:18-0200">Feb 12th 2021</time>
-          </p>
+          <div className="flex flex-col items-start justify-between w-full md:flex-row md:items-center dark:text-gray-700">
+            <div className="flex items-center md:space-x-2">
+              <Image
+                src="https://avatars.githubusercontent.com/u/32431960?v=4"
+                alt="portrait"
+                width={16}
+                height={16}
+                className="w-4 h-4 border rounded-full dark:bg-gray-500 dark:border-gray-700"
+              />
+              <p className="text-sm"> Lanly • July 5th, 2022</p>
+            </div>
+            <p className="flex-shrink-0 mt-3 text-sm md:mt-0">4 min read • 1,570 views</p>
+          </div>
         </div>
-        <div className="dark:text-black">
-          <p>{algo?.algorithm}</p>
-          <p>{algo?.brief}</p>
-          <p>{algo?.introduce}</p>
+        <div className="mb-4">
+          <p className="text-xl my-2">算法：{algo?.name}</p>
+          <p className="text-xl my-2">简介：{algo?.brief}</p>
+          <p className="text-xl my-2">时间复杂度：{algo?.algorithm}</p>
+          <p className="text-xl my-2">算法介绍：{algo?.introduce}</p>
         </div>
+        <ItemInput id={id} />
       </article>
-    </>
+      <footer>
+        <div className="space-y-2 py-4 space-x-2 border-t border-dashed dark:border-gray-400">
+          <h4 className="text-lg font-semibold">Related posts</h4>
+          <ul className="ml-4 space-y-1 list-disc">
+            <li>
+              <a rel="noopener noreferrer" href="#" className="hover:underline">
+                Nunc id magna mollis
+              </a>
+            </li>
+            <li>
+              <a rel="noopener noreferrer" href="#" className="hover:underline">
+                Duis molestie, neque eget pretium lobortis
+              </a>
+            </li>
+            <li>
+              <a rel="noopener noreferrer" href="#" className="hover:underline">
+                Mauris nec urna volutpat, aliquam lectus sit amet
+              </a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
   );
 };
 

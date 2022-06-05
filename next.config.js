@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   images: {
-    domains: ["source.unsplash.com"],
+    domains: ["source.unsplash.com", "avatars.githubusercontent.com"],
     loader: "akamai",
     path: "",
   },

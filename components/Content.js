@@ -47,15 +47,14 @@ export const Content = () => {
           <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
             <span className="relative inline-block">
               <Badget />
-              <span className="relative">中山大学 </span>
-            </span>{" "}
-            算法超市项目
+              <span className="relative text-2xl"> 大学生创新创业训练计划项目 </span>
+            </span>
+            <br />
+            算法超市
           </h2>
-          <p className="text-base text-gray-700 md:text-lg">
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-            rem aperiam, eaque ipsa quae.
-          </p>
+          <p className="text-base text-gray-700 md:text-lg">中山大学 大学生创新创业训练计划项目</p>
         </div>
+
         <div className="grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2">
           {items &&
             items.map((item, idx) => {
@@ -73,8 +72,8 @@ export const Content = () => {
 
         <div className="text-center">
           <Link href="/market">
-            <a className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
-              Learn more
+            <a className=" transform hover:-translate-y-0.5 inline-flex items-center justify-center w-full h-10 px-8 font-medium tracking-wide text-white transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-200 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none">
+              查看更多
             </a>
           </Link>
         </div>

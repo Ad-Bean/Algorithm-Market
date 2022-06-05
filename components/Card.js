@@ -11,17 +11,14 @@ function Card(props) {
   };
 
   return (
-    <div
-      className="duration-300 transform bg-white  hover:-translate-y-2
-    max-w-xs rounded-md shadow-md dark:bg-white dark:text-black"
-    >
+    <div className="duration-300 transform bg-white hover:-translate-y-2 max-w-xs rounded-md shadow-md dark:bg-white dark:text-black">
       <div className="flex justify-center items-center justify-items-center object-cover object-center mx-auto w-full rounded-t-md ">
         <Image
           src={`https://source.unsplash.com/random/300x300/?${id}`}
           alt="picture"
-          width={200}
-          height={200}
-          className="text-center  dark:bg-gray-100"
+          width={160}
+          height={160}
+          className="dark:bg-gray-100 text-center"
         />
       </div>
 

@@ -16,3 +16,13 @@ export async function getItem(id) {
   const response = await API.get(`items/${id}`);
   return response.data.data;
 }
+
+export async function getInput(id) {
+  const response = await API.get(`items/${id}/inputs`);
+  return response.data.data;
+}
+
+export async function getOutput(id) {
+  const response = await API.get(`items/${id}/inputs`);
+  return response.data.data;
+}
