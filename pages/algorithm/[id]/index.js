@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { getItem } from "@api/api";
 import SnackBar from "@components/SnackBar";
+import MDEditor from "@components/MDEditor";
 import Image from "next/image";
 import ItemInput from "@components/ItemInput";
 
@@ -72,10 +73,12 @@ const Post = () => {
           </div>
         </div>
         <div className="mb-4">
-          <p className="text-xl my-2">算法：{algo?.name}</p>
+          <p className="text-xl my-2">名称：{algo?.name}</p>
           <p className="text-xl my-2">简介：{algo?.brief}</p>
-          <p className="text-xl my-2">时间复杂度：{algo?.algorithm}</p>
-          <p className="text-xl my-2">算法介绍：{algo?.introduce}</p>
+          <p className="text-xl my-2">介绍：</p>
+          <MDEditor value={algo?.introduce} mde={algo?.name} />
+          <p className="text-xl my-2">算法：</p>
+          <MDEditor value={algo?.algorithm} mde={algo?.name + "1"} />
         </div>
         <ItemInput id={id} />
       </article>
