@@ -1,8 +1,11 @@
 import "../styles/globals.css";
 import { Nav } from "@components/Nav";
 import Head from "next/head";
+import { useState } from "react";
 
 function MyApp({ Component, pageProps }) {
+  const [user, setUser] = useState();
+
   return (
     <>
       <Head>
@@ -10,8 +13,8 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <div className="h-full">
-        <Nav />
-        <Component {...pageProps} />
+        <Nav user={user} setUser={setUser} />
+        <Component {...pageProps} user={user} setUser={setUser} />
       </div>
     </>
   );

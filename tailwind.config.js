@@ -4,6 +4,9 @@ module.exports = {
 
   theme: {
     extend: {
+      wdith: {
+        128: "64rem",
+      },
       fontFamily: {
         sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
       },

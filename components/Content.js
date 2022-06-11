@@ -5,7 +5,8 @@ import SnackBar from "./SnackBar";
 import { getList } from "../pages/api/api";
 import Link from "next/link";
 
-export const Content = () => {
+export const Content = (props) => {
+  const { user } = props;
   const [items, setItems] = useState(null);
   const [message, setMessage] = useState("");
 

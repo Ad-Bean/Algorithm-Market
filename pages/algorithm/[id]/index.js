@@ -6,8 +6,9 @@ import SnackBar from "@components/SnackBar";
 import MDEditor from "@components/MDEditor";
 import Image from "next/image";
 import ItemInput from "@components/ItemInput";
+import MDPreview from "@components/MDPreview";
 
-const Post = () => {
+const Post = ({ user }) => {
   const router = useRouter();
   const { id } = router.query;
   const [algo, setAlgo] = useState();
@@ -61,7 +62,7 @@ const Post = () => {
             <div className="flex items-center md:space-x-2">
               <Image
                 src="https://avatars.githubusercontent.com/u/32431960?v=4"
-                crossorigin=""
+                crossOrigin=""
                 alt="portrait"
                 width={16}
                 height={16}
@@ -69,22 +70,30 @@ const Post = () => {
               />
               <p className="text-sm"> Lanly • July 5th, 2022</p>
             </div>
-            <p className="flex-shrink-0 mt-3 text-sm md:mt-0">4 min read • 1,570 views</p>
+            <p className="flex-shrink-0 mt-3 text-sm md:mt-0"> 4 min read • 1,570 views </p>
           </div>
         </div>
         <div className="mb-4">
           <p className="text-xl my-2">名称：{algo?.name}</p>
           <p className="text-xl my-2">简介：{algo?.brief}</p>
           <p className="text-xl my-2">介绍：</p>
-          <MDEditor value={algo?.introduce} mde={algo?.name} />
+          {user ? (
+            <MDPreview value={algo?.introduce} mde={algo?.name} />
+          ) : (
+            <MDEditor value={algo?.introduce} mde={algo?.name} />
+          )}
           <p className="text-xl my-2">算法：</p>
-          <MDEditor value={algo?.algorithm} mde={algo?.name + "1"} />
+          {user ? (
+            <MDPreview value={algo?.introduce} mde={algo?.name + "1"} />
+          ) : (
+            <MDEditor value={algo?.algorithm} mde={algo?.name + "1"} />
+          )}
         </div>
         <ItemInput id={id} />
       </article>
       <footer>
         <div className="space-y-2 py-4 space-x-2 border-t border-dashed dark:border-gray-400">
-          <h4 className="text-lg font-semibold">相关算法</h4>
+          <h4 className="text-lg font-semibold"> 相关算法 </h4>
           <ul className="ml-4 space-y-1 list-disc">
             <li>
               <a rel="noopener noreferrer" href="#" className="hover:underline">
