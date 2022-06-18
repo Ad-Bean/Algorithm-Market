@@ -24,8 +24,14 @@ function Card(props) {
 
       <div className="shadow-sm flex flex-col justify-between p-6 space-y-8">
         <div className="space-y-2">
-          <h2 className="text-3xl font-semibold tracking-wide">{name}</h2>
-          <p className="dark:text-black">{brief}</p>
+          <h2 className="text-2xl font-semibold tracking-wide w-full overflow-hidden whitespace-nowrap text-ellipsis h-12">
+            {" "}
+            {name}{" "}
+          </h2>
+          <p className="w-full overflow-hidden whitespace-pre-nowrap text-ellipsis h-14">
+            {" "}
+            {brief}{" "}
+          </p>
           <p className=" text-sm dark:text-gray-700">
             标签：
             {tag && tag.map((t, idx) => <span key={idx}>{t} </span>)}
