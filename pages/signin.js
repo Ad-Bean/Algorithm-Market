@@ -17,7 +17,7 @@ export default function Signin({ user, setUser }) {
       user: email,
       password: password,
     });
-    if (user) router.push("/");
+    router.push("/");
   };
 
   return (
