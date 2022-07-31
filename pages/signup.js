@@ -4,6 +4,7 @@ import SnackBar from "@components/SnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Upload from "@icons/Upload";
+import { postSignup } from "@api/api";
 
 export default function Signup() {
   const router = useRouter();
@@ -16,8 +17,9 @@ export default function Signup() {
   const [confirm, setConfirm] = useState("");
   const [message, setMessage] = useState("");
 
-  const signup = (e) => {
+  const signup = async (e) => {
     e.preventDefault();
+
     if (!email || !password) {
       setMessage("邮箱或密码不能为空！");
       return;
@@ -29,11 +31,11 @@ export default function Signup() {
     }
 
     console.log(avatarb64, email, password, confirm, username);
-    // setUser({
-    //   user: email,
-    //   password: password,
-    // });
-    // router.push("/");
+    try {
+      await postSignup(username, email, password, confirm, avatarb64);
+    } catch (error) {
+      setMessage(error);
+    }
   };
 
   return (

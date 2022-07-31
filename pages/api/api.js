@@ -27,7 +27,7 @@ export async function getOutput(itemId, inputId) {
   return response.data.data;
 }
 
-export async function Signup(username, email, password, password_confirm, avatar) {
+export async function postSignup(username, email, password, password_confirm, avatar) {
   const response = await API.post("user/register", {
     username: username,
     password: password,
