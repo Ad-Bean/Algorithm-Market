@@ -1,11 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import SnackBar from "@components/SnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Upload from "@icons/Upload";
 
 export default function Signup() {
   const router = useRouter();
 
+  const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,29 +37,81 @@ export default function Signup() {
     <>
       {message ? <SnackBar message={message} /> : null}
       <div
-        className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+        className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-10"
         onClick={() => {
           if (message) setMessage("");
         }}
       >
         <div className="shadow-lg w-[64rem] flex flex-col max-w-md p-6 rounded-md sm:p-10 dark:bg-gray-100">
-          <div className="mb-8 text-center">
-            <h1 className="my-3 text-4xl font-bold"> 注册 </h1>
-            <p className="text-sm dark:text-gray-500"> 中山大学 算法超市 </p>
+          <div className="mb-6 text-center">
+            <h1 className="my-0 text-4xl font-bold"> 注册 </h1>
           </div>
           <form noValidate="" action="" className="space-y-12 ng-untouched ng-pristine ng-valid">
             <div className="space-y-4">
               <div>
-                <label htmlFor="avatar" className="block mb-2 text-sm">
-                  头像
-                </label>
-                <input
-                  type="file"
-                  accept="image/png,image/jpeg,image/gif"
-                  name="avatar"
-                  id="avatar"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
-                />
+                {avatar ? (
+                  <div className="">
+                    <img
+                      src={URL.createObjectURL(avatar)}
+                      alt="avatar"
+                      className="object-cover object-center w-32 h-32 mx-auto rounded dark:bg-gray-500"
+                    />
+                    <label
+                      htmlFor="avatar"
+                      className="mx-auto mt-2 cursor-pointer flex w-32 max-w-lg flex-col items-center  border-2 bg-white p-0 text-center"
+                    >
+                      <p className="mt-0 text-sm text-gray-500 tracking-wide">重新上传</p>
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/gif"
+                        name="avatar"
+                        id="avatar"
+                        className="hidden w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                        onChange={(e) => {
+                          setAvatar(e.target.files[0]);
+                        }}
+                      />
+                    </label>
+                  </div>
+                ) : (
+                  <>
+                    <label
+                      htmlFor="avatar"
+                      className="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center"
+                    >
+                      <Upload />
+                      <p className="mt-2 text-sm text-gray-500 tracking-wide">
+                        文件类型 PNG, JPG or GIF.{" "}
+                      </p>
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/gif"
+                        name="avatar"
+                        id="avatar"
+                        className="hidden w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                        onChange={(e) => {
+                          console.log(e.target.files);
+                          setAvatar(e.target.files[0]);
+                          // const file = document.querySelector("input[type=file]").files[0];
+                          // const reader = new FileReader();
+
+                          // reader.addEventListener(
+                          //   "load",
+                          //   () => {
+                          //     // convert image file to base64 string
+                          //     preview.src = reader.result;
+                          //   },
+                          //   false
+                          // );
+
+                          // if (file) {
+                          //   reader.readAsDataURL(file);
+                          // }
+                        }}
+                      />
+                    </label>
+                  </>
+                )}
               </div>
               <div>
                 <label htmlFor="username" className="block mb-2 text-sm">
