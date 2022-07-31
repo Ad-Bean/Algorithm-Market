@@ -30,9 +30,9 @@ export default function Signup() {
       return;
     }
 
-    console.log(avatarb64, email, password, confirm, username);
     try {
-      await postSignup(username, email, password, confirm, avatarb64);
+      const result = await postSignup(username, email, password, confirm, avatarb64);
+      console.log(result);
     } catch (error) {
       setMessage(error);
     }
