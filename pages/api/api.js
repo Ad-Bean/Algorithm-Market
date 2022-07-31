@@ -26,3 +26,14 @@ export async function getOutput(itemId, inputId) {
   const response = await API.get(`items/${itemId}/inputs/${inputId}/output`);
   return response.data.data;
 }
+
+export async function Signup(username, email, password, password_confirm, avatar) {
+  const response = await API.post("user/register", {
+    username: username,
+    password: password,
+    password_confirm: password_confirm,
+    avatar: avatar,
+    email: email,
+  });
+  return response.data.data;
+}

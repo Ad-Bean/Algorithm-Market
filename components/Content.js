@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 import Badget from "./icons/Badget";
 import SnackBar from "./SnackBar";
-import { getList } from "../pages/api/api";
+import { getList } from "@api/api";
 import Link from "next/link";
 
 export const Content = (props) => {
