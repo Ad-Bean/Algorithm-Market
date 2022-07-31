@@ -8,16 +8,18 @@ import Upload from "@icons/Upload";
 export default function Signup() {
   const router = useRouter();
 
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState(null);
+  const [avatarb64, setAvatarb64] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [message, setMessage] = useState("");
 
-  const signup = () => {
+  const signup = (e) => {
+    e.preventDefault();
     if (!email || !password) {
-      setMessage("用户名或密码不能为空！");
+      setMessage("邮箱或密码不能为空！");
       return;
     }
 
@@ -26,11 +28,12 @@ export default function Signup() {
       return;
     }
 
-    setUser({
-      user: email,
-      password: password,
-    });
-    router.push("/");
+    console.log(avatarb64, email, password, confirm, username);
+    // setUser({
+    //   user: email,
+    //   password: password,
+    // });
+    // router.push("/");
   };
 
   return (
@@ -42,11 +45,15 @@ export default function Signup() {
           if (message) setMessage("");
         }}
       >
-        <div className="shadow-lg w-[64rem] flex flex-col max-w-md p-6 rounded-md sm:p-10 dark:bg-gray-100">
+        <div className="shadow-lg w-[64rem] flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100">
           <div className="mb-6 text-center">
             <h1 className="my-0 text-4xl font-bold"> 注册 </h1>
           </div>
-          <form noValidate="" action="" className="space-y-12 ng-untouched ng-pristine ng-valid">
+          <form
+            noValidate=""
+            onSubmit={signup}
+            className="space-y-12 ng-untouched ng-pristine ng-valid"
+          >
             <div className="space-y-4">
               <div>
                 {avatar ? (
@@ -54,7 +61,7 @@ export default function Signup() {
                     <img
                       src={URL.createObjectURL(avatar)}
                       alt="avatar"
-                      className="object-cover object-center w-32 h-32 mx-auto rounded dark:bg-gray-500"
+                      className="object-cover object-center w-32 h-32 mx-auto rounded bg-gray-500"
                     />
                     <label
                       htmlFor="avatar"
@@ -66,7 +73,7 @@ export default function Signup() {
                         accept="image/png,image/jpeg,image/gif"
                         name="avatar"
                         id="avatar"
-                        className="hidden w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                        className="hidden w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                         onChange={(e) => {
                           setAvatar(e.target.files[0]);
                         }}
@@ -77,7 +84,7 @@ export default function Signup() {
                   <>
                     <label
                       htmlFor="avatar"
-                      className="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-blue-400 bg-white p-6 text-center"
+                      className="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-indigo-400 bg-white p-6 text-center"
                     >
                       <Upload />
                       <p className="mt-2 text-sm text-gray-500 tracking-wide">
@@ -88,25 +95,14 @@ export default function Signup() {
                         accept="image/png,image/jpeg,image/gif"
                         name="avatar"
                         id="avatar"
-                        className="hidden w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                        className="hidden w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                         onChange={(e) => {
-                          console.log(e.target.files);
                           setAvatar(e.target.files[0]);
-                          // const file = document.querySelector("input[type=file]").files[0];
-                          // const reader = new FileReader();
-
-                          // reader.addEventListener(
-                          //   "load",
-                          //   () => {
-                          //     // convert image file to base64 string
-                          //     preview.src = reader.result;
-                          //   },
-                          //   false
-                          // );
-
-                          // if (file) {
-                          //   reader.readAsDataURL(file);
-                          // }
+                          const reader = new FileReader();
+                          reader.readAsDataURL(e.target.files[0]);
+                          reader.onloadend = () => {
+                            setAvatarb64(reader.result);
+                          };
                         }}
                       />
                     </label>
@@ -126,7 +122,7 @@ export default function Signup() {
                     setUsername(e.target.value);
                   }}
                   placeholder="leroy"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                  className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                 />
               </div>
               <div>
@@ -141,8 +137,9 @@ export default function Signup() {
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
+                  required
                   placeholder="leroy@jenkins.com"
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                  className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                 />
               </div>
               <div>
@@ -157,10 +154,11 @@ export default function Signup() {
                   id="password"
                   placeholder="*****"
                   value={password}
+                  required
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                  className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                 />
               </div>
               <div>
@@ -175,27 +173,27 @@ export default function Signup() {
                   id="passwordConfirm"
                   placeholder="*****"
                   value={confirm}
+                  required
                   onChange={(e) => {
                     setConfirm(e.target.value);
                   }}
-                  className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-700"
+                  className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                 />
               </div>
             </div>
             <div className="space-y-2">
               <div>
                 <button
-                  type="button"
-                  className="transition duration-200 hover:bg-violet-600 w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-200"
-                  onClick={() => signup()}
+                  type="submit"
+                  className="transition duration-200 hover:bg-violet-600 w-full px-8 py-3 font-semibold rounded-md bg-violet-400 text-gray-200"
                 >
                   注 册
                 </button>
               </div>
-              <p className="px-10 w-full text-sm text-center dark:text-gray-400">
+              <p className="px-10 w-full text-sm text-center text-gray-400">
                 已有账号？{" "}
                 <Link href="/signin">
-                  <a rel="noopener noreferrer" className="hover:underline dark:text-violet-400">
+                  <a rel="noopener noreferrer" className="hover:underline text-violet-400">
                     登录账号
                   </a>
                 </Link>
