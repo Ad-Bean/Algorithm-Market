@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
     } else {
       setUserId();
     }
-  }, [userId]);
+  }, []);
 
   return (
     <>
