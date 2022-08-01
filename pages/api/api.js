@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_ENV_VARIABLE;
-
 axios.defaults.withCredentials = true;
+
 const API = axios.create({
   baseURL: baseUrl,
   timeout: 1000,
@@ -43,10 +43,14 @@ export async function postSignup(username, email, password, avatar) {
 }
 
 export async function postSignin(email, password) {
-  const response = await API.post("user/login", {
-    email: email,
-    password: password,
-  });
+  const response = await API.post(
+    "user/login",
+    {
+      email: email,
+      password: password,
+    },
+    { withCredentials: true }
+  );
   return response;
 }
 

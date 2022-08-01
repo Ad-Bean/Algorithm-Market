@@ -21,14 +21,15 @@ export default function Signin({ userId, setUserId }) {
     }
 
     const result = await postSignin(email, password);
-    console.log(result);
+    console.log(result.headers);
     if (result.data.code === 40001) {
       setMessage(result.message);
     } else {
       setSuccess("登录成功，跳转中");
       setUserId(result.data.data.id);
+      localStorage.setItem("user_id", result.data.data.id);
       axios.defaults.headers.cookie = result.headers["set-cookie"];
-      // router.push("/");
+      router.push("/");
     }
   };
   const getInfo = async () => {

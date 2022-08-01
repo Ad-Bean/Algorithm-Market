@@ -5,14 +5,13 @@ import SnackBar from "@components/SnackBar";
 import { useEffect, useState } from "react";
 
 export const Nav = (props) => {
-  const { userId } = props;
+  const { userId, setUserId, message, setMessage } = props;
   const [info, setInfo] = useState(null);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const getInfo = async () => {
       const res = await getUserInfo();
-      return res.json();
+      return res;
     };
 
     if (userId) {
@@ -21,14 +20,22 @@ export const Nav = (props) => {
           console.log(info);
           setInfo(info);
         })
-        .catch((err) => setMessage("发生错误"));
+        .catch((err) => {
+          console.log(err);
+          setMessage("发生错误");
+        });
     }
-  }, [userId]);
+  }, [setMessage, userId]);
+
+  const logout = () => {
+    localStorage.removeItem("user_id");
+    setUserId();
+  };
 
   return (
     <>
       {message ? <SnackBar message={message} /> : null}
-      <div className="sticky h-16 top-0 z-50 bg-white shadow-sm">
+      <div className="sticky h-16 top-0 z-50 bg-white shadow-sm" onClick={() => setMessage("")}>
         <div className=" py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div className="relative flex items-center justify-between">
             <Link href="/">
@@ -75,7 +82,7 @@ export const Nav = (props) => {
                     <Image
                       src="https://source.unsplash.com/50x50/?portrait"
                       alt="Avatar"
-                      onClick={() => console.log("Avatar")}
+                      onClick={() => logout()}
                       width={32}
                       height={32}
                       className="hover:cursor-pointer w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-700"
