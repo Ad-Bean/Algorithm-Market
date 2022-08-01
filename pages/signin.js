@@ -1,10 +1,9 @@
-import axios from "axios";
 import React, { useState } from "react";
 import SnackBar from "@components/SnackBar";
 import SuccessSnackBar from "@components/SuccessSnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { postSignin, getUserInfo } from "@api/api";
+import { postSignin } from "@api/api";
 
 export default function Signin({ userId, setUserId }) {
   const router = useRouter();
@@ -21,20 +20,14 @@ export default function Signin({ userId, setUserId }) {
     }
 
     const result = await postSignin(email, password);
-    console.log(result.headers);
     if (result.data.code === 40001) {
       setMessage(result.message);
     } else {
       setSuccess("登录成功，跳转中");
       setUserId(result.data.data.id);
       localStorage.setItem("user_id", result.data.data.id);
-      axios.defaults.headers.cookie = result.headers["set-cookie"];
       router.push("/");
     }
-  };
-  const getInfo = async () => {
-    const res = await getUserInfo();
-    console.log(res);
   };
 
   return (
@@ -108,13 +101,6 @@ export default function Signin({ userId, setUserId }) {
                   className="transition duration-200 hover:bg-violet-600 w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-200"
                 >
                   登 录
-                </button>
-                <button
-                  type="button"
-                  className="transition duration-200 hover:bg-violet-600 w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-200"
-                  onClick={() => getInfo()}
-                >
-                  test
                 </button>
               </div>
               <p className="px-10 w-full text-sm text-center dark:text-gray-400">

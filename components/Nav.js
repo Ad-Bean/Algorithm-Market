@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SnackBar from "@components/SnackBar";
 import { useEffect, useState } from "react";
+import { getUserInfo } from "@api/api";
 
 export const Nav = (props) => {
   const { userId, setUserId, message, setMessage } = props;
@@ -21,7 +22,7 @@ export const Nav = (props) => {
           setInfo(info);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           setMessage("发生错误");
         });
     }
