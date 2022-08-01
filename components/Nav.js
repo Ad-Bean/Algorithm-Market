@@ -18,7 +18,6 @@ export const Nav = (props) => {
     if (userId) {
       getInfo()
         .then((info) => {
-          console.log(info);
           setInfo(info);
         })
         .catch((err) => {
@@ -81,7 +80,7 @@ export const Nav = (props) => {
                 {userId ? (
                   <div className="relative flex-shrink-0">
                     <Image
-                      src="https://source.unsplash.com/50x50/?portrait"
+                      src={info.data.avatar || "https://source.unsplash.com/50x50/?portrait"}
                       alt="Avatar"
                       onClick={() => logout()}
                       width={32}
