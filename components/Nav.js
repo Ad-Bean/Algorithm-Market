@@ -80,7 +80,7 @@ export const Nav = (props) => {
                 {userId ? (
                   <div className="relative flex-shrink-0">
                     <Image
-                      src={info.data.avatar || "https://source.unsplash.com/50x50/?portrait"}
+                      src={info?.avatar || "https://source.unsplash.com/50x50/?portrait"}
                       alt="Avatar"
                       onClick={() => logout()}
                       width={32}

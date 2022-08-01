@@ -52,5 +52,5 @@ export async function postSignin(email, password) {
 
 export async function getUserInfo() {
   const response = await API.get("user/info");
-  return response.data;
+  return response.data.data;
 }
