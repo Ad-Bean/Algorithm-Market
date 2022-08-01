@@ -6,7 +6,6 @@ axios.defaults.withCredentials = true;
 const API = axios.create({
   baseURL: baseUrl,
   timeout: 1000,
-  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
@@ -43,14 +42,10 @@ export async function postSignup(username, email, password, avatar) {
 }
 
 export async function postSignin(email, password) {
-  const response = await API.post(
-    "user/login",
-    {
-      email: email,
-      password: password,
-    },
-    { withCredentials: true }
-  );
+  const response = await API.post("user/login", {
+    email: email,
+    password: password,
+  });
   return response;
 }
 
