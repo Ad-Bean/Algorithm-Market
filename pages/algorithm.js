@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function algorithm() {
+export default function Algorithm() {
   return (
     <section className="my-8 dark:text-black">
       <div className="container flex flex-col items-center p-4 mx-auto space-y-6 md:p-8">

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import SnackBar from "@components/SnackBar";
+import SuccessSnackBar from "@components/SuccessSnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Upload from "@icons/Upload";
@@ -16,6 +17,7 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState("");
 
   const signup = async (e) => {
     e.preventDefault();
@@ -31,8 +33,13 @@ export default function Signup() {
     }
 
     try {
-      const result = await postSignup(username, email, password, confirm, avatarb64);
-      console.log(result);
+      const result = await postSignup(username, email, password, avatarb64);
+      if (result.code === 40001) {
+        setMessage(result.message);
+      } else {
+        setSuccess("注册成功，跳转中");
+        router.push("/signup");
+      }
     } catch (error) {
       setMessage(error);
     }
@@ -41,6 +48,7 @@ export default function Signup() {
   return (
     <>
       {message ? <SnackBar message={message} /> : null}
+      {success ? <SuccessSnackBar message={success} /> : null}
       <div
         className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-10"
         onClick={() => {
@@ -84,6 +92,7 @@ export default function Signup() {
                   </div>
                 ) : (
                   <>
+                    <p className="block mb-2 text-sm">头像</p>
                     <label
                       htmlFor="avatar"
                       className="mx-auto cursor-pointer flex w-full max-w-lg flex-col items-center rounded-xl border-2 border-dashed border-indigo-400 bg-white p-6 text-center"
@@ -141,7 +150,7 @@ export default function Signup() {
                   }}
                   required
                   placeholder="leroy@jenkins.com"
-                  className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
+                  className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700 invalid:border-red-500"
                 />
               </div>
               <div>

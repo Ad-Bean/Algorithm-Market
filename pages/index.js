@@ -1,5 +1,5 @@
 import { Content } from "@components/Content";
 
-export default function Home({ user }) {
-  return <Content user={user} />;
+export default function Home({ userId }) {
+  return <Content userId={userId} />;
 }

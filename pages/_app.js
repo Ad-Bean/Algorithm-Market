@@ -1,10 +1,18 @@
 import "../styles/globals.css";
 import { Nav } from "@components/Nav";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function MyApp({ Component, pageProps }) {
-  const [user, setUser] = useState();
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const user_id = localStorage.getItem("user_id");
+    if (user_id) {
+      setUserId(userId);
+    } else {
+    }
+  }, [userId]);
 
   return (
     <>
@@ -13,8 +21,8 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <div className="h-full">
-        <Nav user={user} setUser={setUser} />
-        <Component {...pageProps} user={user} setUser={setUser} />
+        <Nav userId={userId} />
+        <Component {...pageProps} userId={userId} setUserId={setUserId} />
       </div>
     </>
   );

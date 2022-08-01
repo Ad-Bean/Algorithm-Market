@@ -6,7 +6,7 @@ import { getList } from "@api/api";
 import Link from "next/link";
 
 export const Content = (props) => {
-  const { user } = props;
+  const { userId } = props;
   const [items, setItems] = useState(null);
   const [message, setMessage] = useState("");
 

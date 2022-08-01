@@ -1,29 +1,45 @@
+import axios from "axios";
 import React, { useState } from "react";
 import SnackBar from "@components/SnackBar";
+import SuccessSnackBar from "@components/SuccessSnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { postSignin, getUserInfo } from "@api/api";
 
-export default function Signin({ user, setUser }) {
+export default function Signin({ userId, setUserId }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState("");
 
-  const login = () => {
+  const login = async (e) => {
+    e.preventDefault();
+
     if (!email || !password) {
-      setMessage("用户名或密码不能为空！");
+      setMessage("邮箱或密码不能为空！");
     }
 
-    setUser({
-      user: email,
-      password: password,
-    });
-    router.push("/");
+    const result = await postSignin(email, password);
+    console.log(result);
+    if (result.data.code === 40001) {
+      setMessage(result.message);
+    } else {
+      setSuccess("登录成功，跳转中");
+      setUserId(result.data.data.id);
+      axios.defaults.headers.cookie = result.headers["set-cookie"];
+      // router.push("/");
+    }
+  };
+  const getInfo = async () => {
+    const res = await getUserInfo();
+    console.log(res);
   };
 
   return (
     <>
       {message ? <SnackBar message={message} /> : null}
+      {success ? <SuccessSnackBar message={success} /> : null}
       <div
         onClick={() => {
           if (message) setMessage("");
@@ -35,7 +51,11 @@ export default function Signin({ user, setUser }) {
             <h1 className="my-3 text-4xl font-bold"> 登录 </h1>
             <p className="text-sm dark:text-gray-500"> 中山大学 算法超市 </p>
           </div>
-          <form noValidate="" action="" className="space-y-12 ng-untouched ng-pristine ng-valid">
+          <form
+            noValidate=""
+            onSubmit={login}
+            className="space-y-12 ng-untouched ng-pristine ng-valid"
+          >
             <div className="space-y-4">
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm">
@@ -58,13 +78,14 @@ export default function Signin({ user, setUser }) {
                   <label htmlFor="password" className="text-sm">
                     密码
                   </label>
-                  <a
-                    rel="noopener noreferrer"
-                    href="#"
-                    className="text-xs hover:underline dark:text-gray-400"
-                  >
-                    忘记密码？
-                  </a>
+                  <Link href="/signup">
+                    <a
+                      rel="noopener noreferrer"
+                      className="text-xs hover:underline dark:text-gray-400"
+                    >
+                      忘记密码？
+                    </a>
+                  </Link>
                 </div>
                 <input
                   type="password"
@@ -82,11 +103,17 @@ export default function Signin({ user, setUser }) {
             <div className="space-y-2">
               <div>
                 <button
-                  type="button"
+                  type="submit"
                   className="transition duration-200 hover:bg-violet-600 w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-200"
-                  onClick={() => login()}
                 >
                   登 录
+                </button>
+                <button
+                  type="button"
+                  className="transition duration-200 hover:bg-violet-600 w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-200"
+                  onClick={() => getInfo()}
+                >
+                  test
                 </button>
               </div>
               <p className="px-10 w-full text-sm text-center dark:text-gray-400">
