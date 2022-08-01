@@ -6,6 +6,7 @@ axios.defaults.withCredentials = true;
 const API = axios.create({
   baseURL: baseUrl,
   timeout: 1000,
+  withCredentials: true,
   headers: {
     "Content-Type": "application/json",
   },
