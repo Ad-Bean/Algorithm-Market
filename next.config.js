@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  trailingSlash: true,
+  swcMinify: true,
   images: {
-    domains: ["source.unsplash.com", "avatars.githubusercontent.com"],
-    loader: "akamai",
-    path: "",
+    domains: ["source.unsplash.com"],
   },
 };
 

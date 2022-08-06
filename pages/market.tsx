@@ -1,9 +1,12 @@
 import Image from "next/image";
 import React from "react";
 
-const Card = (props) => {
-  const { title, content } = props;
+type Props = {
+  title: string;
+  content: string;
+};
 
+const Card = ({ title, content }: Props) => {
   return (
     <div className="flex flex-col justify-between overflow-hidden text-left transition-shadow duration-200 bg-white rounded shadow-xl group hover:shadow-2xl hover:scale-105 cursor-pointer">
       <div className="p-5">

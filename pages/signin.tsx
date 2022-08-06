@@ -5,14 +5,19 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { postSignin } from "@api/api";
 
-export default function Signin({ userId, setUserId }) {
+type Props = {
+  userId: number | null;
+  setUserId: Function;
+};
+
+export default function Signin({ userId, setUserId }: Props) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState("");
 
-  const login = async (e) => {
+  const login = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -45,11 +50,7 @@ export default function Signin({ userId, setUserId }) {
             <h1 className="my-3 text-4xl font-bold"> 登录 </h1>
             <p className="text-sm dark:text-gray-500"> 中山大学 算法超市 </p>
           </div>
-          <form
-            noValidate=""
-            onSubmit={login}
-            className="space-y-12 ng-untouched ng-pristine ng-valid"
-          >
+          <form onSubmit={login} className="space-y-12 ng-untouched ng-pristine ng-valid">
             <div className="space-y-4">
               <div>
                 <label htmlFor="email" className="block mb-2 text-sm">

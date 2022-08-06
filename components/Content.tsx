@@ -5,8 +5,11 @@ import SnackBar from "./SnackBar";
 import { getList } from "@api/api";
 import Link from "next/link";
 
-export const Content = (props) => {
-  const { userId } = props;
+type Props = {
+  userId: number | null;
+};
+
+export const Content = ({ userId }: Props) => {
   const [items, setItems] = useState(null);
   const [message, setMessage] = useState("");
 

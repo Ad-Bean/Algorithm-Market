@@ -12,27 +12,34 @@ const API = axios.create({
   },
 });
 
+export interface Response {}
+
 export async function getList() {
   const response = await API.get("items");
   return response.data.data;
 }
 
-export async function getItem(id) {
+export async function getItem(id: number) {
   const response = await API.get(`items/${id}`);
   return response.data.data;
 }
 
-export async function getInput(id) {
+export async function getInput(id: number) {
   const response = await API.get(`items/${id}/inputs`);
   return response.data.data;
 }
 
-export async function getOutput(itemId, inputId) {
+export async function getOutput(itemId: number, inputId: number) {
   const response = await API.get(`items/${itemId}/inputs/${inputId}/output`);
   return response.data.data;
 }
 
-export async function postSignup(username, email, password, avatar) {
+export async function postSignup(
+  username: string,
+  email: string,
+  password: string,
+  avatar: string
+) {
   const response = await API.post("user/register", {
     username: username,
     password: password,
@@ -42,7 +49,7 @@ export async function postSignup(username, email, password, avatar) {
   return response.data;
 }
 
-export async function postSignin(email, password) {
+export async function postSignin(email: string, password: string) {
   const response = await API.post("user/login", {
     email: email,
     password: password,

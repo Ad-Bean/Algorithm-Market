@@ -1,17 +1,18 @@
 import "../styles/globals.css";
+import type { AppProps } from "next/app";
 import { Nav } from "@components/Nav";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-function MyApp({ Component, pageProps }) {
-  const [userId, setUserId] = useState();
+function MyApp({ Component, pageProps }: AppProps) {
+  const [userId, setUserId] = useState<number | null>(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("user_id")) {
-      setUserId(localStorage.getItem("user_id"));
+      setUserId(Number(localStorage.getItem("user_id")));
     } else {
-      setUserId();
+      setUserId(null);
     }
   }, []);
 
