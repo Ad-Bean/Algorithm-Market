@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Icon from "./icons/Icon";
 import Link from "next/link";
 import Image from "next/image";
@@ -93,55 +94,54 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
                   <li>
                     {info ? (
                       <>
-                        <div className="relative flex-shrink-0 peer group">
-                          <Image
-                            src={info?.avatar || "https://source.unsplash.com/50x50/?portrait"}
-                            alt="Avatar"
-                            onClick={() => logout()}
-                            width={32}
-                            height={32}
-                            className="pb-10 hover:cursor-pointer w-12 h-12 border rounded-full dark:bg-gray-500 dark:border-gray-600"
-                          />
-                          <ul className="invisible peer-hover:visible group-hover:visible transition-all ease-in-out absolute top-11 z-50 shadow-indigo-500/40 -left-12 text-base text-[#838c96] rounded-sm antialiased border-[#e7ebf0] bg-white border">
-                            {userSettings.map((setting, idx) => (
+                        <div className="relative flex-shrink-0 mr-8">
+                          <div className="hover:cursor-pointer flex items-center justify-center peer group">
+                            <img
+                              className="object-cover h-8 w-8 rounded-full border border-gray-400"
+                              alt="Avatar"
+                              src={info?.avatar || "https://source.unsplash.com/50x50/?portrait"}
+                            />
+                            <ul className="invisible peer-hover:visible group-hover:visible transition-all ease-in-out absolute top-11 z-50 shadow-indigo-500/40 -left-12 text-base text-[#838c96] rounded-sm antialiased border-[#e7ebf0] bg-white border">
+                              {userSettings.map((setting, idx) => (
+                                <li
+                                  key={idx}
+                                  className="text-center whitespace-nowrap tracking-wider my-1 py-2 leading-none px-4 cursor-pointer hover:bg-[#f4f6fb] hover:text-[#40454d] text-sm"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    if (setting.label === "设置") {
+                                      router.push("/settings");
+                                    }
+                                  }}
+                                >
+                                  {setting.label}
+
+                                  {setting.label === "用户名" && (
+                                    <>
+                                      <br />
+                                      <span className="text-xs text-[10px] cursor-default">
+                                        {info?.username || "username"}
+                                      </span>
+                                    </>
+                                  )}
+
+                                  {setting.label === "邮箱" && (
+                                    <>
+                                      <br />
+                                      <span className="text-xs text-[10px] cursor-default">
+                                        {info?.email || "email@email.com"}
+                                      </span>
+                                    </>
+                                  )}
+                                </li>
+                              ))}
                               <li
-                                key={idx}
+                                onClick={() => logout()}
                                 className="text-center whitespace-nowrap tracking-wider my-1 py-2 leading-none px-4 cursor-pointer hover:bg-[#f4f6fb] hover:text-[#40454d] text-sm"
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  if (setting.label === "设置") {
-                                    router.push("/settings");
-                                  }
-                                }}
                               >
-                                {setting.label}
-
-                                {setting.label === "用户名" && (
-                                  <>
-                                    <br />
-                                    <span className="text-xs text-[10px] cursor-default">
-                                      {info?.username || "username"}
-                                    </span>
-                                  </>
-                                )}
-
-                                {setting.label === "邮箱" && (
-                                  <>
-                                    <br />
-                                    <span className="text-xs text-[10px] cursor-default">
-                                      {info?.email || "email@email.com"}
-                                    </span>
-                                  </>
-                                )}
+                                退出
                               </li>
-                            ))}
-                            <li
-                              onClick={() => logout()}
-                              className="text-center whitespace-nowrap tracking-wider my-1 py-2 leading-none px-4 cursor-pointer hover:bg-[#f4f6fb] hover:text-[#40454d] text-sm"
-                            >
-                              退出
-                            </li>
-                          </ul>
+                            </ul>
+                          </div>
                         </div>
                       </>
                     ) : (

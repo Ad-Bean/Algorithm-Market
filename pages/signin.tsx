@@ -47,7 +47,7 @@ export default function Signin({ setUserEmail, setInfo }: Props) {
         onClick={() => {
           if (message) setMessage("");
         }}
-        className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+        className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 py-10 lg:py-20"
       >
         <div className="shadow-lg w-[64rem] flex flex-col max-w-md p-6 rounded-md sm:p-10 dark:bg-gray-100">
           <div className="mb-8 text-center">
