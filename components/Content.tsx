@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 import Badget from "./icons/Badget";
-import SnackBar from "./SnackBar";
+import ErrorSnackBar from "./ErrorSnackBar";
 import { getList } from "@api/api";
 import Link from "next/link";
+import { ItemInfo } from "@interfaces/Items";
 
 type Props = {
-  userId: number | null;
+  role: string;
+  userEmail: string | null;
 };
 
-export const Content = ({ userId }: Props) => {
-  const [items, setItems] = useState(null);
+export const Content = ({ role }: Props) => {
+  const [items, setItems] = useState<ItemInfo[] | null>(null);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -18,8 +20,8 @@ export const Content = ({ userId }: Props) => {
       try {
         const ret = await getList();
         setItems(ret);
-      } catch (err) {
-        setMessage(err.message);
+      } catch (e) {
+        setMessage((e as Error).message);
       }
     };
     getLists();
@@ -37,12 +39,12 @@ export const Content = ({ userId }: Props) => {
 
   return (
     <>
-      {message ? <SnackBar message={message} /> : null}
+      {message ? <ErrorSnackBar message={message} /> : null}
       <div
         onClick={closeSnackBar}
-        className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20"
+        className="px-4 py-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-10"
       >
-        <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+        <div className="max-w-xl mb-10 md:mx-auto text-center lg:max-w-2xl md:mb-12">
           <div>
             <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
               Algorithm Market
@@ -59,16 +61,18 @@ export const Content = ({ userId }: Props) => {
           <p className="text-base text-gray-700 md:text-lg">中山大学 大学生创新创业训练计划项目</p>
         </div>
 
-        <div className="grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2">
+        <div className="mx-auto grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2">
           {items &&
             items.map((item, idx) => {
               return (
                 <Card
+                  role={role}
                   key={item.id}
                   id={item.id}
                   tag={item.tag}
                   name={item.name}
                   brief={item.brief}
+                  picture={item.picture}
                 />
               );
             })}

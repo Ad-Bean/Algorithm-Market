@@ -1,9 +1,11 @@
 import { Content } from "@components/Content";
+import { UserInfo } from "@interfaces/UserInfo";
 
 type Props = {
-  userId: number | null;
+  userEmail: string | null;
+  info: UserInfo;
 };
 
-export default function Home({ userId }: Props) {
-  return <Content userId={userId} />;
+export default function Home({ userEmail, info }: Props) {
+  return <Content role={info?.role} userEmail={userEmail} />;
 }

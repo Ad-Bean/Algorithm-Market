@@ -2,17 +2,21 @@ import React, { useEffect, useState } from "react";
 import Vditor from "vditor";
 import "vditor/dist/index.css";
 
-function MDPreview(props) {
-  const { value, mde } = props;
-  const [vd, setVd] = useState();
+type Props = {
+  value: string | undefined;
+  mde: string | undefined;
+};
+
+function MDPreview({ value, mde }: Props) {
+  const [vd, setVd] = useState<Vditor>();
 
   useEffect(() => {
-    if (!mde) return;
+    if (!mde || !value) return;
 
     const vid = mde;
     const vditor = new Vditor(vid, {
       after: () => {
-        vditor.setValue(value);
+        vditor.setValue(value!);
         setVd(vditor);
       },
       toolbar: [
@@ -47,7 +51,7 @@ function MDPreview(props) {
       ],
       counter: {
         enable: true,
-        type: "统计字数",
+        type: "markdown",
       },
       cache: {
         id: mde,

@@ -1,8 +1,8 @@
-import React from "react";
+type Props = {
+  message: string;
+};
 
-function SnackBar(props) {
-  const { message } = props;
-
+function ErrorSnackBar({ message }: Props) {
   return (
     <div className="absolute inset-x-0 top-16 w-96 h-8 mx-auto">
       <div
@@ -36,4 +36,4 @@ function SnackBar(props) {
   );
 }
 
-export default SnackBar;
+export default ErrorSnackBar;

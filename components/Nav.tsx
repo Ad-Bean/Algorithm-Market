@@ -1,50 +1,47 @@
 import Icon from "./icons/Icon";
 import Link from "next/link";
 import Image from "next/image";
-import SnackBar from "@components/SnackBar";
-import { useEffect, useState } from "react";
-import { getUserInfo } from "@api/api";
+import ErrorSnackBar from "@components/ErrorSnackBar";
+import { useState } from "react";
+import { userLogout } from "@api/api";
 import { useRouter } from "next/router";
+import { UserInfo } from "@interfaces/UserInfo";
+import SuccessSnackBar from "./SuccessSnackBar";
 
-export const Nav = (props) => {
+type Props = {
+  info: UserInfo | null;
+  setInfo: Function;
+  setUserEmail: Function;
+  message: string;
+  setMessage: Function;
+};
+
+export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props) => {
   const router = useRouter();
-  const { userId, setUserId, message, setMessage } = props;
-  const [info, setInfo] = useState(null);
+  const [success, setSuccess] = useState("");
+  const userSettings = [{ label: "用户名" }, { label: "邮箱" }, { label: "设置", href: "" }];
 
-  const userSettings = [
-    { label: "用户名" },
-    { label: "邮箱" },
-    { label: "设置", href: "" },
-    { label: "退出", href: "/" },
-  ];
-
-  useEffect(() => {
-    const getInfo = async () => {
-      const res = await getUserInfo();
-      return res;
-    };
-
-    if (userId) {
-      getInfo()
-        .then((info) => {
-          setInfo(info);
-        })
-        .catch((err) => {
-          console.error(err);
-          setMessage("发生错误");
-        });
+  const logout = async () => {
+    localStorage.removeItem("user_email");
+    setUserEmail(null);
+    setInfo(null);
+    const result = await userLogout();
+    if (result.code === 200) {
+      setSuccess("登出成功！");
     }
-  }, [setMessage, userId]);
-
-  const logout = () => {
-    localStorage.removeItem("user_id");
-    setUserId();
   };
 
   return (
     <>
-      {message ? <SnackBar message={message} /> : null}
-      <div className="sticky h-16 top-0 z-50 bg-white shadow-sm" onClick={() => setMessage("")}>
+      {message ? <ErrorSnackBar message={message} /> : null}
+      {success ? <SuccessSnackBar message={success} /> : null}
+      <div
+        className="sticky h-16 top-0 z-50 bg-white shadow-sm"
+        onClick={() => {
+          setMessage("");
+          setSuccess("");
+        }}
+      >
         <div className=" py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
           <div className="relative flex items-center justify-between">
             <Link href="/">
@@ -86,7 +83,7 @@ export const Nav = (props) => {
                 </Link>
               </li>
               <li>
-                {userId ? (
+                {info ? (
                   <>
                     <div className="relative flex-shrink-0 peer group">
                       <Image
@@ -106,8 +103,6 @@ export const Nav = (props) => {
                               e.preventDefault();
                               if (setting.label === "设置") {
                                 router.push("/settings");
-                              } else if (setting.label === "退出") {
-                                logout();
                               }
                             }}
                           >
@@ -121,6 +116,7 @@ export const Nav = (props) => {
                                 </span>
                               </>
                             )}
+
                             {setting.label === "邮箱" && (
                               <>
                                 <br />
@@ -131,6 +127,12 @@ export const Nav = (props) => {
                             )}
                           </li>
                         ))}
+                        <li
+                          onClick={() => logout()}
+                          className="text-center whitespace-nowrap tracking-wider my-1 py-2 leading-none px-4 cursor-pointer hover:bg-[#f4f6fb] hover:text-[#40454d] text-sm"
+                        >
+                          退出
+                        </li>
                       </ul>
                     </div>
                   </>

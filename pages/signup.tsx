@@ -1,17 +1,22 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import SnackBar from "@components/SnackBar";
+import React, { FormEvent, useState } from "react";
+import ErrorSnackBar from "@components/ErrorSnackBar";
 import SuccessSnackBar from "@components/SuccessSnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Upload from "@icons/Upload";
-import { postSignup } from "@api/api";
+import { postSignin, postSignup } from "@api/api";
 
-export default function Signup() {
+type Props = {
+  setInfo: Function;
+  setUserEmail: Function;
+};
+
+export default function Signup({ setUserEmail, setInfo }: Props) {
   const router = useRouter();
 
-  const [avatar, setAvatar] = useState(null);
-  const [avatarb64, setAvatarb64] = useState("");
+  const [avatar, setAvatar] = useState<File | null>(null);
+  const [avatarb64, setAvatarb64] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,7 +24,7 @@ export default function Signup() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState("");
 
-  const signup = async (e) => {
+  const signup = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -33,21 +38,27 @@ export default function Signup() {
     }
 
     try {
-      const result = await postSignup(username, email, password, avatarb64);
+      const result = await postSignup(username, email, password, avatarb64!);
       if (result.code === 40001) {
         setMessage(result.message);
       } else {
+        const signInRes = await postSignin(email, password);
         setSuccess("注册成功，跳转中");
-        router.push("/signup");
+        setTimeout(() => {
+          router.push("/");
+        }, 500);
+        setInfo(signInRes.data);
+        setUserEmail(signInRes.data.data.email);
+        localStorage.setItem("user_email", signInRes.data.data.email);
       }
     } catch (error) {
-      setMessage(error);
+      setMessage((error as Error).message);
     }
   };
 
   return (
     <>
-      {message ? <SnackBar message={message} /> : null}
+      {message ? <ErrorSnackBar message={message} /> : null}
       {success ? <SuccessSnackBar message={success} /> : null}
       <div
         className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-10"
@@ -59,11 +70,7 @@ export default function Signup() {
           <div className="mb-6 text-center">
             <h1 className="my-0 text-4xl font-bold"> 注册 </h1>
           </div>
-          <form
-            noValidate=""
-            onSubmit={signup}
-            className="space-y-12 ng-untouched ng-pristine ng-valid"
-          >
+          <form onSubmit={signup} className="space-y-12 ng-untouched ng-pristine ng-valid">
             <div className="space-y-4">
               <div>
                 {avatar ? (
@@ -85,6 +92,7 @@ export default function Signup() {
                         id="avatar"
                         className="hidden w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                         onChange={(e) => {
+                          if (!e.target.files) return;
                           setAvatar(e.target.files[0]);
                         }}
                       />
@@ -108,11 +116,12 @@ export default function Signup() {
                         id="avatar"
                         className="hidden w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                         onChange={(e) => {
+                          if (!e.target.files) return;
                           setAvatar(e.target.files[0]);
                           const reader = new FileReader();
                           reader.readAsDataURL(e.target.files[0]);
                           reader.onloadend = () => {
-                            setAvatarb64(reader.result);
+                            setAvatarb64(reader.result as string);
                           };
                         }}
                       />

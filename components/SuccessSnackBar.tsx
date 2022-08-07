@@ -1,8 +1,8 @@
-import React from "react";
+type Props = {
+  message: string;
+};
 
-function SuccessSnackBar(props) {
-  const { message } = props;
-
+function SuccessSnackBar({ message }: Props) {
   return (
     <div className="absolute inset-x-0 top-16 w-96 h-8 mx-auto">
       <div

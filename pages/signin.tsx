@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import SnackBar from "@components/SnackBar";
+import React, { FormEvent, useState } from "react";
+import ErrorSnackBar from "@components/ErrorSnackBar";
 import SuccessSnackBar from "@components/SuccessSnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { postSignin } from "@api/api";
 
 type Props = {
-  userId: number | null;
-  setUserId: Function;
+  setUserEmail: Function;
+  setInfo: Function;
 };
 
-export default function Signin({ userId, setUserId }: Props) {
+export default function Signin({ setUserEmail, setInfo }: Props) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState("");
 
-  const login = async (e: React.FormEvent) => {
+  const login = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
@@ -25,19 +25,23 @@ export default function Signin({ userId, setUserId }: Props) {
     }
 
     const result = await postSignin(email, password);
+
     if (result.data.code === 40001) {
-      setMessage(result.message);
+      setMessage(result.data.message);
     } else {
+      setTimeout(() => {
+        router.push("/");
+      }, 500);
       setSuccess("登录成功，跳转中");
-      setUserId(result.data.data.id);
-      localStorage.setItem("user_id", result.data.data.id);
-      router.push("/");
+      setInfo(result.data);
+      setUserEmail(result.data.data.email);
+      localStorage.setItem("user_email", result.data.data.email);
     }
   };
 
   return (
     <>
-      {message ? <SnackBar message={message} /> : null}
+      {message ? <ErrorSnackBar message={message} /> : null}
       {success ? <SuccessSnackBar message={success} /> : null}
       <div
         onClick={() => {
