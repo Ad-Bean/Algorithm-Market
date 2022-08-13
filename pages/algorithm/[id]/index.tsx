@@ -100,7 +100,7 @@ const Post = ({ info: userInfo }: Props) => {
               <MDEditor value={itemInfo?.algorithm} mde={itemInfo?.name + "1"} />
             )}
           </div>
-          <ItemInput input={itemInfo?.input} />
+          {id && <ItemInput input={itemInfo?.input} itemId={parseInt(id as string)} />}
         </article>
         <footer>
           <div className="space-y-2 py-4 space-x-2 border-t border-dashed dark:border-gray-400">

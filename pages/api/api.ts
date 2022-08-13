@@ -1,5 +1,5 @@
 import { DefaultResponse } from "@interfaces/DefaultResponse";
-import { InputBody, Output } from "@interfaces/Input";
+import { InputBody, Output, OutputResponse } from "@interfaces/Input";
 import { ItemInfoResponse, ItemInformation, ItemsResponse } from "@interfaces/Items";
 import { UserResponse } from "@interfaces/UserInfo";
 import axios from "axios";
@@ -44,13 +44,8 @@ export async function deleteItem(id: number) {
 }
 
 export async function postInput(input: InputBody) {
-  const response = await API.post<Output>("/judge", input);
+  const response = await API.post<OutputResponse>("/judge", input);
   return response.data;
-}
-
-export async function getOutput(itemId: number, inputId: number) {
-  const response = await API.get(`items/${itemId}/inputs/${inputId}/output`);
-  return response.data.data;
 }
 
 export async function postSignup(
