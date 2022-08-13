@@ -1,8 +1,8 @@
-import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getList } from "@api/api";
-import { InferGetStaticPropsType } from "next/types";
 import router from "next/router";
+import { ItemInfo } from "@interfaces/Items";
+import { toast, ToastContainer } from "react-toastify";
 
 type CardInfo = {
   title: string;
@@ -10,19 +10,11 @@ type CardInfo = {
   id: number;
 };
 
-type Props = InferGetStaticPropsType<typeof getStaticProps>;
-
-export async function getStaticProps() {
-  const posts = await getList();
-  return {
-    props: { posts },
-  };
-}
-
 const BriefCard = ({ title, content, id }: CardInfo) => {
   const readMore = () => {
     router.push(`/algorithm/${id}`);
   };
+
   return (
     <div
       onClick={readMore}
@@ -52,23 +44,50 @@ const BriefCard = ({ title, content, id }: CardInfo) => {
   );
 };
 
-export const Market = ({ posts }: Props) => {
+export const Market = () => {
+  const [posts, setPosts] = useState<ItemInfo[] | null>();
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await getList();
+      return res;
+    };
+
+    getData()
+      .then((res) => setPosts(res))
+      .catch((_) => toast.error("获取数据失败"));
+  }, []);
+
   return (
-    <div className="w-full">
-      <div className="relative px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-        <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {posts.map((post, _idx) => (
-            <BriefCard key={post.id} title={post.name} content={post.brief} id={post.id} />
-          ))}
-          {posts.map((post, _idx) => (
-            <BriefCard key={post.id} title={post.name} content={post.brief} id={post.id} />
-          ))}
-          {posts.map((post, _idx) => (
-            <BriefCard key={post.id} title={post.name} content={post.brief} id={post.id} />
-          ))}
+    <>
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+      />
+      <div className="w-full">
+        <div className="relative px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+          <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {posts &&
+              posts.map((post, _idx) => (
+                <BriefCard key={post.id} title={post.name} content={post.brief} id={post.id} />
+              ))}
+            {posts &&
+              posts.map((post, _idx) => (
+                <BriefCard key={post.id} title={post.name} content={post.brief} id={post.id} />
+              ))}
+            {posts &&
+              posts.map((post, _idx) => (
+                <BriefCard key={post.id} title={post.name} content={post.brief} id={post.id} />
+              ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

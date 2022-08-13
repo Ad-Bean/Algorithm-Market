@@ -1,22 +1,42 @@
 import { getList } from "@api/api";
 import { Content } from "@components/Content";
+import { ItemInfo } from "@interfaces/Items";
 import { UserInfo } from "@interfaces/UserInfo";
 import { InferGetStaticPropsType } from "next/types";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 type User = {
   userEmail: string | null;
   info: UserInfo;
 };
 
-type Props = User & InferGetStaticPropsType<typeof getStaticProps>;
+export default function Home({ info, userEmail }: User) {
+  const [posts, setPosts] = useState<ItemInfo[] | null>();
 
-export default function Home({ info, userEmail, posts }: Props) {
-  return <Content posts={posts} role={info?.role} userEmail={userEmail} />;
-}
+  useEffect(() => {
+    const getData = async () => {
+      const res = await getList();
+      return res;
+    };
 
-export async function getStaticProps() {
-  const posts = await getList();
-  return {
-    props: { posts },
-  };
+    getData()
+      .then((res) => setPosts(res))
+      .catch((_) => toast.error("获取数据失败"));
+  }, []);
+
+  return (
+    <>
+      <ToastContainer
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        pauseOnHover
+      />
+      {posts && <Content posts={posts} role={info?.role} userEmail={userEmail} />}
+    </>
+  );
 }
