@@ -1,35 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Card from "./Card";
 import Badget from "./icons/Badget";
 import ErrorSnackBar from "./ErrorSnackBar";
-import { getList } from "@api/api";
 import Link from "next/link";
 import { ItemInfo } from "@interfaces/Items";
 
 type Props = {
+  posts: ItemInfo[];
   role: string;
   userEmail: string | null;
 };
 
-export const Content = ({ role }: Props) => {
-  const [items, setItems] = useState<ItemInfo[] | null>(null);
+export const Content = ({ posts, role, userEmail }: Props) => {
   const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    const getLists = async () => {
-      try {
-        const ret = await getList();
-        setItems(ret);
-      } catch (e) {
-        setMessage((e as Error).message);
-      }
-    };
-    getLists();
-
-    return () => {
-      setMessage("");
-    };
-  }, []);
 
   const closeSnackBar = () => {
     if (message) {
@@ -62,8 +45,8 @@ export const Content = ({ role }: Props) => {
         </div>
 
         <div className="mx-auto grid gap-8 row-gap-5 mb-8 md:row-gap-8 lg:grid-cols-4 sm:grid-cols-2">
-          {items &&
-            items.map((item, idx) => {
+          {posts &&
+            posts.slice(0, 4).map((item, idx) => {
               return (
                 <Card
                   role={role}

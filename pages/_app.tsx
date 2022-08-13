@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title> 中山大学算法超市 </title>
-        <link rel="icon" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <div className="h-full" onClick={() => setMessage("")}>
         <Nav

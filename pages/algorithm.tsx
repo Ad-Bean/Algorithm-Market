@@ -1,7 +1,18 @@
+import { getList } from "@api/api";
 import Image from "next/image";
+import { InferGetStaticPropsType } from "next/types";
 import React from "react";
 
-export default function Algorithm() {
+type Props = InferGetStaticPropsType<typeof getStaticProps>;
+
+export async function getStaticProps() {
+  const posts = await getList();
+  return {
+    props: { posts },
+  };
+}
+
+export default function Algorithm({ posts }: Props) {
   return (
     <section className="my-8 dark:text-black">
       <div className="container flex flex-col items-center p-4 mx-auto space-y-6 md:p-8">
