@@ -5,9 +5,10 @@ import Terminal from "./Terminal";
 
 type Props = {
   itemId: number;
+  inputs: string[];
 };
 
-export default function Playground({ itemId }: Props) {
+export default function Playground({ itemId, inputs }: Props) {
   const [openTab, setOpenTab] = useState(1);
   const [result, setResult] = useState("");
   const [image, setImage] = useState("");
@@ -78,6 +79,7 @@ export default function Playground({ itemId }: Props) {
                     setOpenTab={setOpenTab}
                     setResult={setResult}
                     setImage={setImage}
+                    inputs={inputs}
                   />
                 )}
               </div>

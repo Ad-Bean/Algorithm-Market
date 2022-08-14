@@ -101,7 +101,7 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
                               alt="Avatar"
                               src={info?.avatar || "https://source.unsplash.com/50x50/?portrait"}
                             />
-                            <ul className="invisible peer-hover:visible group-hover:visible transition-all ease-in-out absolute top-11 z-50 shadow-indigo-500/40 -left-12 text-base text-[#838c96] rounded-sm antialiased border-[#e7ebf0] bg-white border">
+                            <ul className="drop-down invisible peer-hover:visible group-hover:visible transition-all ease-in-out absolute top-11 z-50 shadow-indigo-500/40 -left-12 text-base text-[#838c96] rounded-sm antialiased border-[#e7ebf0] bg-white border">
                               {userSettings.map((setting, idx) => (
                                 <li
                                   key={idx}

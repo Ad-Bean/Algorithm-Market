@@ -104,7 +104,7 @@ const Post = ({ info: userInfo }: Props) => {
           {id && <ItemInput input={itemInfo?.input} itemId={parseInt(id as string)} />}
         </article>
         <div className="bg-gray-100 rounded-3xl p-2">
-          {id && <Playground itemId={parseInt(id as string)} />}
+          {id && <Playground itemId={parseInt(id as string)} inputs={itemInfo?.input} />}
         </div>
         <footer>
           <div className="space-y-2 py-4 space-x-2 border-t border-dashed dark:border-gray-400">
