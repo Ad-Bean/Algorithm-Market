@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 type Props = {
   itemId: number;
   setOpenTab: Function;
+  setResult: Function;
+  setImage: Function;
 };
 
-export default function Terminal({ itemId, setOpenTab }: Props) {
+export default function Terminal({ itemId, setOpenTab, setResult, setImage }: Props) {
   const [input, setInput] = useState("");
 
   const postJudge = async (e: FormEvent) => {
@@ -21,7 +23,11 @@ export default function Terminal({ itemId, setOpenTab }: Props) {
         toast.error(`错误代码 ${res.code}， 请检查输入或重试`);
       } else {
         toast.success("提交成功");
-        setOpenTab(2);
+        setResult(res.data?.text);
+        setImage(res.data?.img);
+        setTimeout(() => {
+          setOpenTab(2);
+        }, 500);
       }
     });
   };

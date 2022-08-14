@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from "react";
+import ResultTerminal from "./ResultTerminal";
 import Terminal from "./Terminal";
 
 type Props = {
@@ -6,7 +8,9 @@ type Props = {
 };
 
 export default function Playground({ itemId }: Props) {
-  const [openTab, setOpenTab] = React.useState(1);
+  const [openTab, setOpenTab] = useState(1);
+  const [result, setResult] = useState("");
+  const [image, setImage] = useState("");
 
   return (
     <>
@@ -65,38 +69,23 @@ export default function Playground({ itemId }: Props) {
               </a>
             </li>
           </ul>
-          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-            <div className="px-4 py-5 flex-auto">
-              <div className="tab-content tab-space">
-                <div className={openTab === 1 ? "block" : "hidden"} id="link1">
-                  {itemId && <Terminal itemId={itemId} setOpenTab={setOpenTab} />}
-                  {/* <p>
-                    Collaboratively administrate empowered markets via plug-and-play networks.
-                    Dynamically procrastinate B2C users after installed base benefits.
-                    <br />
-                    <br /> Dramatically visualize customer directed convergence without
-                    revolutionary ROI.
-                  </p> */}
-                </div>
-                <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                  <p>
-                    Completely synergize resource taxing relationships via premier niche markets.
-                    Professionally cultivate one-to-one customer service with robust ideas.
-                    <br />
-                    <br />
-                    Dynamically innovate resource-leveling customer service for state of the art
-                    customer service.
-                  </p>
-                </div>
-                <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-                  <p>
-                    Efficiently unleash cross-media information without cross-media value. Quickly
-                    maximize timely deliverables for real-time schemas.
-                    <br />
-                    <br /> Dramatically maintain clicks-and-mortar solutions without functional
-                    solutions.
-                  </p>
-                </div>
+          <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded">
+            <div className="tab-content tab-space">
+              <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                {itemId && (
+                  <Terminal
+                    itemId={itemId}
+                    setOpenTab={setOpenTab}
+                    setResult={setResult}
+                    setImage={setImage}
+                  />
+                )}
+              </div>
+              <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                <ResultTerminal result={result} />
+              </div>
+              <div className={"pb-2 " + (openTab === 3 ? "block" : "hidden")} id="link3">
+                <ImageCard src={image} />
               </div>
             </div>
           </div>
@@ -105,3 +94,21 @@ export default function Playground({ itemId }: Props) {
     </>
   );
 }
+
+type ImageProps = {
+  src: string;
+};
+
+const ImageCard = ({ src }: ImageProps) => {
+  return (
+    <div className="flex flex-wrap justify-center">
+      <div className="w-6/12 sm:w-4/12 px-4">
+        <img
+          src={`data:image/jpeg;base64,${src}`}
+          alt="..."
+          className="shadow rounded max-w-full h-auto align-middle border-none"
+        />
+      </div>
+    </div>
+  );
+};

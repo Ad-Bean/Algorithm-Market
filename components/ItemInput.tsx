@@ -54,7 +54,7 @@ export default function ItemInput({ input, itemId }: Props) {
         pauseOnFocusLoss
         pauseOnHover
       />
-      <div className="bg-gray-100 dark:text-black font-sans rounded-3xl">
+      <div className="bg-gray-100 font-sans rounded-3xl">
         <div className="container px-6 max-w-4xl py-6 mx-auto shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-sm dark:text-gray-400"> Jun 1, 2022 </span>
