@@ -5,7 +5,7 @@ import Terminal from "./Terminal";
 
 type Props = {
   itemId: number;
-  inputs: string[];
+  inputs: string[] | undefined;
 };
 
 export default function Playground({ itemId, inputs }: Props) {

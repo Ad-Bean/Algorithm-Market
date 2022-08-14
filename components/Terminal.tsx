@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 type Props = {
   itemId: number;
-  inputs: string[];
+  inputs: string[] | undefined;
   setOpenTab: Function;
   setResult: Function;
   setImage: Function;
