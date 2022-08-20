@@ -1,9 +1,8 @@
 import React, { FormEvent, useState } from "react";
-import ErrorSnackBar from "@components/ErrorSnackBar";
-import SuccessSnackBar from "@components/SuccessSnackBar";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { postSignin } from "@api/api";
+import { toast } from "react-toastify";
 
 type Props = {
   setUserEmail: Function;
@@ -14,41 +13,33 @@ export default function Signin({ setUserEmail, setInfo }: Props) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [success, setSuccess] = useState("");
 
   const login = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
-      setMessage("邮箱或密码不能为空！");
+      toast.error("邮箱或密码不能为空！");
+      return;
     }
 
     const result = await postSignin(email, password);
 
     if (result.data.code === 40001) {
-      setMessage(result.data.message);
+      toast.error(result.data.message);
     } else {
       setTimeout(() => {
         router.push("/");
       }, 500);
-      setSuccess("登录成功，跳转中");
       setInfo(result.data);
       setUserEmail(result.data.data.email);
+      toast.success("登录成功，跳转中");
       localStorage.setItem("user_email", result.data.data.email);
     }
   };
 
   return (
     <>
-      {message ? <ErrorSnackBar message={message} /> : null}
-      {success ? <SuccessSnackBar message={success} /> : null}
-      <div
-        onClick={() => {
-          if (message) setMessage("");
-        }}
-        className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 py-10 lg:py-20"
-      >
+      <div className="flex justify-center px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 py-10 lg:py-20">
         <div className="shadow-lg w-[64rem] flex flex-col max-w-md p-6 rounded-md sm:p-10 dark:bg-gray-100">
           <div className="mb-8 text-center">
             <h1 className="my-3 text-4xl font-bold"> 登录 </h1>

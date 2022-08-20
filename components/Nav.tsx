@@ -3,7 +3,7 @@ import Icon from "./icons/Icon";
 import Link from "next/link";
 import Image from "next/image";
 import ErrorSnackBar from "@components/ErrorSnackBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userLogout } from "@api/api";
 import { useRouter } from "next/router";
 import { UserInfo } from "@interfaces/UserInfo";
@@ -19,8 +19,17 @@ type Props = {
 
 export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props) => {
   const router = useRouter();
-  const [success, setSuccess] = useState("");
   const userSettings = [{ label: "用户名" }, { label: "邮箱" }, { label: "设置", href: "" }];
+  const [success, setSuccess] = useState("");
+  const [valid, setValid] = useState(true);
+
+  const checkBase64 = (src: string) => {
+    const _img = document.createElement("img");
+    _img.onerror = () => {
+      setValid(false);
+    };
+    _img.src = src;
+  };
 
   const logout = async () => {
     localStorage.removeItem("user_email");
@@ -31,6 +40,10 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
       setSuccess("登出成功！");
     }
   };
+
+  useEffect(() => {
+    checkBase64(info?.avatar!);
+  }, [info]);
 
   return (
     <>
@@ -99,7 +112,10 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
                             <img
                               className="object-cover h-8 w-8 rounded-full border border-gray-400"
                               alt="Avatar"
-                              src={info?.avatar || "https://source.unsplash.com/50x50/?portrait"}
+                              src={
+                                (valid && info.avatar) ||
+                                "https://source.unsplash.com/50x50/?portrait"
+                              }
                             />
                             <ul className="drop-down invisible peer-hover:visible group-hover:visible transition-all ease-in-out absolute top-11 z-50 shadow-indigo-500/40 -left-12 text-base text-[#838c96] rounded-sm antialiased border-[#e7ebf0] bg-white border">
                               {userSettings.map((setting, idx) => (

@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "@api/api";
 import { UserInfo } from "@interfaces/UserInfo";
+import { toast, ToastContainer } from "react-toastify";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -26,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         })
         .catch((err) => {
           console.error(err);
-          setMessage("发生错误");
+          toast.error("发生错误");
         });
     } else {
       setUserEmail(null);
@@ -39,7 +40,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title> 中山大学算法超市 </title>
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <div className="h-full" onClick={() => setMessage("")}>
+      <div className="h-full">
+        <ToastContainer
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          pauseOnHover
+        />
         <Nav
           info={info}
           setInfo={setInfo}

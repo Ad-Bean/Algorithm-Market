@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ErrorSnackBar from "@components/ErrorSnackBar";
 import { postInput } from "@api/api";
 import { toast, ToastContainer } from "react-toastify";
 import { Output } from "@interfaces/Input";
