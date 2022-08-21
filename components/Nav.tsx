@@ -8,6 +8,7 @@ import { userLogout } from "@api/api";
 import { useRouter } from "next/router";
 import { UserInfo } from "@interfaces/UserInfo";
 import SuccessSnackBar from "./SuccessSnackBar";
+import { toast } from "react-toastify";
 
 type Props = {
   info: UserInfo | null;
@@ -20,7 +21,6 @@ type Props = {
 export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props) => {
   const router = useRouter();
   const userSettings = [{ label: "用户名" }, { label: "邮箱" }, { label: "设置", href: "" }];
-  const [success, setSuccess] = useState("");
   const [valid, setValid] = useState(true);
 
   const checkBase64 = (src: string) => {
@@ -37,7 +37,7 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
     setInfo(null);
     const result = await userLogout();
     if (result.code === 200) {
-      setSuccess("登出成功！");
+      toast.success("登出成功！");
     }
   };
 
@@ -47,15 +47,7 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
 
   return (
     <>
-      {message ? <ErrorSnackBar message={message} /> : null}
-      {success ? <SuccessSnackBar message={success} /> : null}
-      <header
-        className="sticky top-0 z-50 bg-white shadow-md"
-        onClick={() => {
-          setMessage("");
-          setSuccess("");
-        }}
-      >
+      <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="flex-1 md:flex md:items-center md:gap-12">
