@@ -1,6 +1,6 @@
-import Vditor from "vditor";
-import "vditor/dist/index.css";
-import React, { MutableRefObject, useEffect, useRef } from "react";
+import Vditor from 'vditor';
+import 'vditor/dist/index.css';
+import React, { MutableRefObject, useEffect, useRef } from 'react';
 
 type Props = {
   value: string | undefined;
@@ -15,7 +15,7 @@ function MDEditor({ value, mde }: Props) {
 
     const render = async () => {
       await Vditor.preview(preview.current!, value, {
-        mode: "light",
+        mode: 'light',
         anchor: 1,
       });
     };

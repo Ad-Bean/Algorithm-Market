@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import Icon from "./icons/Icon";
-import Link from "next/link";
-import Image from "next/image";
-import ErrorSnackBar from "@components/ErrorSnackBar";
-import { useEffect, useState } from "react";
-import { userLogout } from "@api/api";
-import { useRouter } from "next/router";
-import { UserInfo } from "@interfaces/UserInfo";
-import SuccessSnackBar from "./SuccessSnackBar";
-import { toast } from "react-toastify";
+import Icon from './icons/Icon';
+import Link from 'next/link';
+import Image from 'next/image';
+import ErrorSnackBar from '@components/ErrorSnackBar';
+import { useEffect, useState } from 'react';
+import { userLogout } from '@api/api';
+import { useRouter } from 'next/router';
+import { UserInfo } from '@interfaces/UserInfo';
+import SuccessSnackBar from './SuccessSnackBar';
+import { toast } from 'react-toastify';
 
 type Props = {
   info: UserInfo | null;
@@ -20,24 +20,24 @@ type Props = {
 
 export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props) => {
   const router = useRouter();
-  const userSettings = [{ label: "用户名" }, { label: "邮箱" }, { label: "设置", href: "" }];
+  const userSettings = [{ label: '用户名' }, { label: '邮箱' }, { label: '设置', href: '' }];
   const [valid, setValid] = useState(true);
 
   const checkBase64 = (src: string) => {
-    const _img = document.createElement("img");
-    _img.onerror = () => {
-      setValid(false);
-    };
+    const _img = document.createElement('img');
     _img.src = src;
+    // _img.onerror = () => {
+    //   setValid(false);
+    // };
   };
 
   const logout = async () => {
-    localStorage.removeItem("user_email");
+    localStorage.removeItem('user_email');
     setUserEmail(null);
     setInfo(null);
     const result = await userLogout();
     if (result.code === 200) {
-      toast.success("登出成功！");
+      toast.success('登出成功！');
     }
   };
 
@@ -103,40 +103,40 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
                           <div className="hover:cursor-pointer flex items-center justify-center peer group">
                             <img
                               className="object-cover h-8 w-8 rounded-full border border-gray-400"
-                              alt="Avatar"
+                              alt=""
                               src={
                                 (valid && info.avatar) ||
-                                "https://source.unsplash.com/50x50/?portrait"
+                                'https://source.unsplash.com/50x50/?portrait'
                               }
                             />
-                            <ul className="drop-down invisible peer-hover:visible group-hover:visible transition-all ease-in-out absolute top-11 z-50 shadow-indigo-500/40 -left-12 text-base text-[#838c96] rounded-sm antialiased border-[#e7ebf0] bg-white border">
+                            <ul className="drop-down w-32 invisible peer-hover:visible group-hover:visible transition-all ease-in-out absolute top-11 z-50 shadow-indigo-500/40 -left-12 text-base text-[#838c96] rounded-sm antialiased border-[#e7ebf0] bg-white border">
                               {userSettings.map((setting, idx) => (
                                 <li
                                   key={idx}
-                                  className="text-center whitespace-nowrap tracking-wider my-1 py-2 leading-none px-4 cursor-pointer hover:bg-[#f4f6fb] hover:text-[#40454d] text-sm"
+                                  className="text-center tracking-wider my-1 py-2 leading-none px-4 cursor-pointer   overflow-hidden hover:bg-[#f4f6fb] hover:text-[#40454d] text-sm"
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    if (setting.label === "设置") {
-                                      router.push("/settings");
+                                    if (setting.label === '设置') {
+                                      router.push('/settings');
                                     }
                                   }}
                                 >
                                   {setting.label}
 
-                                  {setting.label === "用户名" && (
+                                  {setting.label === '用户名' && (
                                     <>
                                       <br />
-                                      <span className="text-xs text-[10px] cursor-default">
-                                        {info?.username || "username"}
+                                      <span className="text-xs text-[10px]">
+                                        {info?.username || 'username'}
                                       </span>
                                     </>
                                   )}
 
-                                  {setting.label === "邮箱" && (
+                                  {setting.label === '邮箱' && (
                                     <>
                                       <br />
-                                      <span className="text-xs text-[10px] cursor-default">
-                                        {info?.email || "email@email.com"}
+                                      <span className="text-xs text-[10px]">
+                                        {info?.email || 'email@email.com'}
                                       </span>
                                     </>
                                   )}

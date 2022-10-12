@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function About() {
   return (
@@ -13,7 +13,7 @@ export default function About() {
             </summary>
             <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-700">
               Lectus iaculis orci metus vitae ligula dictum per. Nisl per nullam taciti at
-              adipiscing est.{" "}
+              adipiscing est.{' '}
             </p>
           </details>
           <details className="w-full border rounded-lg">
@@ -22,7 +22,7 @@ export default function About() {
             </summary>
             <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-700">
               Tincidunt ut hac condimentum rhoncus phasellus nostra. Magna porttitor egestas
-              tincidunt neque vehicula potenti.{" "}
+              tincidunt neque vehicula potenti.{' '}
             </p>
           </details>
           <details className="w-full border rounded-lg">
@@ -32,7 +32,7 @@ export default function About() {
             <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-700">
               Justo libero tellus integer tincidunt justo semper consequat venenatis aliquet
               imperdiet. Ultricies urna proin fusce nulla pretium sodales vel magna et massa euismod
-              vulputate sed.{" "}
+              vulputate sed.{' '}
             </p>
           </details>
         </div>

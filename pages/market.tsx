@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { getList } from "@api/api";
-import router from "next/router";
-import { ItemInfo } from "@interfaces/Items";
-import { toast, ToastContainer } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { getList } from '@api/api';
+import router from 'next/router';
+import { ItemInfo } from '@interfaces/Items';
+import { toast, ToastContainer } from 'react-toastify';
 
 type CardInfo = {
   title: string;
@@ -55,7 +55,7 @@ export const Market = () => {
 
     getData()
       .then((res) => setPosts(res))
-      .catch((_) => toast.error("获取数据失败"));
+      .catch((_) => toast.error('获取数据失败'));
   }, []);
 
   return (

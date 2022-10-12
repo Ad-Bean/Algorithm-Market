@@ -1,24 +1,25 @@
-import React, { FormEvent, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { postSignin } from "@api/api";
-import { toast } from "react-toastify";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { postSignin } from '@api/api';
+import { toast } from 'react-toastify';
+import { UserInfo } from '@interfaces/UserInfo';
 
 type Props = {
   setUserEmail: Function;
-  setInfo: Function;
+  setInfo: Dispatch<SetStateAction<UserInfo | null>>;
 };
 
 export default function Signin({ setUserEmail, setInfo }: Props) {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const login = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
-      toast.error("邮箱或密码不能为空！");
+      toast.error('邮箱或密码不能为空！');
       return;
     }
 
@@ -27,13 +28,13 @@ export default function Signin({ setUserEmail, setInfo }: Props) {
     if (result.data.code === 40001) {
       toast.error(result.data.message);
     } else {
-      setTimeout(() => {
-        router.push("/");
-      }, 500);
-      setInfo(result.data);
+      localStorage.setItem('user_email', result.data.data.email);
+      setInfo(result.data.data);
       setUserEmail(result.data.data.email);
-      toast.success("登录成功，跳转中");
-      localStorage.setItem("user_email", result.data.data.email);
+      toast.success('登录成功，跳转中');
+      setTimeout(() => {
+        router.push('/');
+      }, 500);
     }
   };
 
@@ -70,6 +71,7 @@ export default function Signin({ setUserEmail, setInfo }: Props) {
                   </label>
                   <Link href="/signup">
                     <a
+                      tabIndex={-1}
                       rel="noopener noreferrer"
                       className="text-xs hover:underline dark:text-gray-400"
                     >
@@ -100,7 +102,7 @@ export default function Signin({ setUserEmail, setInfo }: Props) {
                 </button>
               </div>
               <p className="px-10 w-full text-sm text-center dark:text-gray-400">
-                还没有账号？{" "}
+                还没有账号？{' '}
                 <Link href="/signup">
                   <a rel="noopener noreferrer" className="hover:underline dark:text-violet-400">
                     注册账号

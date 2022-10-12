@@ -1,6 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import NotFound from "@icons/NotFound";
+import React from 'react';
+import Link from 'next/link';
+import NotFound from '@icons/NotFound';
 
 function _404() {
   return (

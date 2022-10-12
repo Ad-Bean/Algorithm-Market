@@ -1,10 +1,10 @@
-import { getList } from "@api/api";
-import { Content } from "@components/Content";
-import { ItemInfo } from "@interfaces/Items";
-import { UserInfo } from "@interfaces/UserInfo";
-import { InferGetStaticPropsType } from "next/types";
-import { useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { getList } from '@api/api';
+import { Content } from '@components/Content';
+import { ItemInfo } from '@interfaces/Items';
+import { UserInfo } from '@interfaces/UserInfo';
+import { InferGetStaticPropsType } from 'next/types';
+import { useEffect, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 type User = {
   userEmail: string | null;
@@ -22,7 +22,7 @@ export default function Home({ info, userEmail }: User) {
 
     getData()
       .then((res) => setPosts(res))
-      .catch((_) => toast.error("获取数据失败"));
+      .catch((_) => toast.error('获取数据失败'));
   }, []);
 
   return (

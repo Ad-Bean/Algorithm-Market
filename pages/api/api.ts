@@ -1,8 +1,8 @@
-import { DefaultResponse } from "@interfaces/DefaultResponse";
-import { InputBody, Output, OutputResponse } from "@interfaces/Input";
-import { ItemInfoResponse, ItemInformation, ItemsResponse } from "@interfaces/Items";
-import { UserResponse } from "@interfaces/UserInfo";
-import axios from "axios";
+import { DefaultResponse } from '@interfaces/DefaultResponse';
+import { InputBody, Output, OutputResponse } from '@interfaces/Input';
+import { ItemInfoResponse, ItemInformation, ItemsResponse } from '@interfaces/Items';
+import { UserResponse } from '@interfaces/UserInfo';
+import axios from 'axios';
 
 export const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_ENV_VARIABLE;
 axios.defaults.withCredentials = true;
@@ -12,14 +12,14 @@ const API = axios.create({
   timeout: 1000,
   withCredentials: true,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
 export interface Response {}
 
 export async function getList() {
-  const response = await API.get<ItemsResponse>("items");
+  const response = await API.get<ItemsResponse>('items');
   return response.data.data;
 }
 
@@ -44,7 +44,7 @@ export async function deleteItem(id: number) {
 }
 
 export async function postInput(input: InputBody) {
-  const response = await API.post<OutputResponse>("/judge", input);
+  const response = await API.post<OutputResponse>('/judge', input);
   return response.data;
 }
 
@@ -54,7 +54,7 @@ export async function postSignup(
   password: string,
   avatar: string
 ) {
-  const response = await API.post<DefaultResponse>("user/register", {
+  const response = await API.post<DefaultResponse>('user/register', {
     username: username,
     password: password,
     avatar: avatar,
@@ -64,7 +64,7 @@ export async function postSignup(
 }
 
 export async function postSignin(email: string, password: string) {
-  const response = await API.post<UserResponse>("user/login", {
+  const response = await API.post<UserResponse>('user/login', {
     email: email,
     password: password,
   });
@@ -72,11 +72,11 @@ export async function postSignin(email: string, password: string) {
 }
 
 export async function getUserInfo() {
-  const response = await API.get<UserResponse>("user/info");
+  const response = await API.get<UserResponse>('user/info');
   return response.data.data;
 }
 
 export async function userLogout() {
-  const response = await API.delete<DefaultResponse>("user/logout");
+  const response = await API.delete<DefaultResponse>('user/logout');
   return response.data;
 }

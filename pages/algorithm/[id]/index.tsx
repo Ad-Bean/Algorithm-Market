@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { getItem } from "@api/api";
-import SnackBar from "@components/SuccessSnackBar";
-import MDEditor from "@components/MDEditor";
-import Image from "next/image";
-import ItemInput from "@components/ItemInput";
-import MDPreview from "@components/MDPreview";
-import { UserInfo } from "@interfaces/UserInfo";
-import { ItemInformation } from "@interfaces/Items";
-import Playground from "@components/Playground";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { getItem } from '@api/api';
+import SnackBar from '@components/SuccessSnackBar';
+import MDEditor from '@components/MDEditor';
+import Image from 'next/image';
+import ItemInput from '@components/ItemInput';
+import MDPreview from '@components/MDPreview';
+import { UserInfo } from '@interfaces/UserInfo';
+import { ItemInformation } from '@interfaces/Items';
+import Playground from '@components/Playground';
 
 type Props = {
   info: UserInfo;
@@ -19,7 +19,7 @@ const Post = ({ info: userInfo }: Props) => {
   const router = useRouter();
   const { id } = router.query;
   const [itemInfo, setItemInfo] = useState<ItemInformation | null>(null);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     if (!id) return;
@@ -35,13 +35,13 @@ const Post = ({ info: userInfo }: Props) => {
 
     getItems();
     return () => {
-      setMessage("");
+      setMessage('');
     };
   }, [id]);
 
   const closeSnackBar = () => {
     if (message) {
-      setMessage("");
+      setMessage('');
     }
   };
 
@@ -87,7 +87,7 @@ const Post = ({ info: userInfo }: Props) => {
             <TextCardLoading title="简介：" content={itemInfo?.brief} />
             <TextCardLoading title="介绍：" content={undefined} />
 
-            {userInfo?.role === "admin" ? (
+            {userInfo?.role === 'admin' ? (
               <MDPreview value={itemInfo?.introduce} mde={itemInfo?.name} />
             ) : (
               <MDEditor value={itemInfo?.introduce} mde={itemInfo?.name} />
@@ -95,10 +95,10 @@ const Post = ({ info: userInfo }: Props) => {
 
             <p className="text-xl my-2">算法：</p>
 
-            {userInfo?.role === "admin" ? (
-              <MDPreview value={itemInfo?.introduce} mde={itemInfo?.name + "1"} />
+            {userInfo?.role === 'admin' ? (
+              <MDPreview value={itemInfo?.introduce} mde={itemInfo?.name + '1'} />
             ) : (
-              <MDEditor value={itemInfo?.algorithm} mde={itemInfo?.name + "1"} />
+              <MDEditor value={itemInfo?.algorithm} mde={itemInfo?.name + '1'} />
             )}
           </div>
           {id && <ItemInput input={itemInfo?.input} itemId={parseInt(id as string)} />}

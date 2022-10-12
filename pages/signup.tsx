@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FormEvent, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import Upload from "@icons/Upload";
-import { postSignin, postSignup } from "@api/api";
-import { toast } from "react-toastify";
+import React, { FormEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Upload from '@icons/Upload';
+import { postSignin, postSignup } from '@api/api';
+import { toast } from 'react-toastify';
 
 type Props = {
   setInfo: Function;
@@ -16,21 +16,21 @@ export default function Signup({ setUserEmail, setInfo }: Props) {
 
   const [avatar, setAvatar] = useState<File | null>(null);
   const [avatarb64, setAvatarb64] = useState<string | null>(null);
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
 
   const signup = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!email || !password) {
-      toast.error("邮箱或密码不能为空！");
+      toast.error('邮箱或密码不能为空！');
       return;
     }
 
     if (password != confirm) {
-      toast.error("两次密码不一致！");
+      toast.error('两次密码不一致！');
       return;
     }
 
@@ -40,13 +40,13 @@ export default function Signup({ setUserEmail, setInfo }: Props) {
         toast.error(result.message);
       } else {
         const signInRes = await postSignin(email, password);
-        toast.success("注册成功，跳转中");
+        toast.success('注册成功，跳转中');
         setTimeout(() => {
-          router.push("/");
+          router.push('/');
         }, 500);
         setInfo(signInRes.data);
         setUserEmail(signInRes.data.data.email);
-        localStorage.setItem("user_email", signInRes.data.data.email);
+        localStorage.setItem('user_email', signInRes.data.data.email);
       }
     } catch (error) {
       toast.error((error as Error).message);
@@ -96,7 +96,7 @@ export default function Signup({ setUserEmail, setInfo }: Props) {
                   >
                     <Upload />
                     <p className="mt-2 text-sm text-gray-500 tracking-wide">
-                      文件类型 PNG, JPG or GIF.{" "}
+                      文件类型 PNG, JPG or GIF.{' '}
                     </p>
                     <input
                       type="file"
@@ -200,7 +200,7 @@ export default function Signup({ setUserEmail, setInfo }: Props) {
               </button>
             </div>
             <p className="px-10 w-full text-sm text-center text-gray-400">
-              已有账号？{" "}
+              已有账号？{' '}
               <Link href="/signin">
                 <a rel="noopener noreferrer" className="hover:underline text-violet-400">
                   登录账号
