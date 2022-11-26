@@ -39,6 +39,7 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
     const result = await userLogout();
     if (result.code === 200) {
       toast.success('登出成功！');
+      router.push('/');
     }
   };
 
