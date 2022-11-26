@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 type Props = {
   role: string;
@@ -19,15 +19,28 @@ function Card({ role, id, brief, name, picture, tag }: Props) {
     router.push(`/algorithm/${id}`);
   };
 
+  const [valid, setValid] = useState(true);
+  useEffect(() => {
+    checkBase64(picture);
+  }, [picture]);
+
+  const checkBase64 = (src: string) => {
+    const _img = document.createElement('img');
+    _img.src = src;
+    _img.onerror = () => {
+      setValid(false);
+    };
+  };
+
   return (
     <div className="mx-auto w-full duration-300 transform bg-white hover:-translate-y-2 max-w-xs rounded-md shadow-md ">
       <div className="flex justify-center items-center justify-items-center object-cover object-center mx-auto w-full rounded-t-md ">
         <Image
-          src={`https://source.unsplash.com/random/300x300/?${id}`}
-          alt="picture"
           width={160}
           height={160}
           className="dark:bg-gray-100 text-center"
+          alt="picture"
+          src={(valid && picture) || 'https://source.unsplash.com/50x50/?portrait'}
         />
       </div>
 
@@ -43,7 +56,7 @@ function Card({ role, id, brief, name, picture, tag }: Props) {
               tag.map((t, idx) => (
                 <span key={idx} className="text-indigo-300 cursor-pointer hover:text-indigo-600">
                   {t}
-                  {","}{" "}
+                  {','}{' '}
                 </span>
               ))}
           </p>

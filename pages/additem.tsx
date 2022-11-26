@@ -30,7 +30,6 @@ function AddItem({}: Props) {
   const [output, setOutput] = useState<boolean>(false);
 
   const handlePostNewItem = () => {
-    console.log(output);
     if (
       !name ||
       !brief ||
@@ -58,7 +57,9 @@ function AddItem({}: Props) {
     };
 
     postItem(payload)
-      .then((res) => console.log(res))
+      .then((res) => {
+        toast.success('添加记录成功');
+      })
       .catch((err) => console.error(err));
   };
 
