@@ -51,7 +51,7 @@ export default function Post(props: Props) {
   const { info: userInfo } = props;
   const router = useRouter();
   const { id } = router.query;
-  const [itemInfo, setItemInfo] = useState<ItemInformation | null>(null);
+  const [itemInfo, setItemInfo] = useState<ItemInformation>();
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -121,14 +121,10 @@ export default function Post(props: Props) {
             <TextCardLoading title="名称：" content={itemInfo?.name} />
             <TextCardLoading title="简介：" content={itemInfo?.brief} />
             <TextCardLoading title="介绍：" content={undefined} />
-
-            <MDPreview value={itemInfo?.introduce} mde={itemInfo?.name} />
+            {itemInfo?.introduce && <MDEditor value={itemInfo?.introduce} mde={itemInfo?.name!} />}
 
             <p className="text-xl my-2">算法：</p>
-
-            {userInfo?.role === 'admin' ? (
-              <MDPreview value={itemInfo?.introduce} mde={itemInfo?.name + '1'} />
-            ) : (
+            {itemInfo?.algorithm && (
               <MDEditor value={itemInfo?.algorithm} mde={itemInfo?.name + '1'} />
             )}
           </div>

@@ -3,15 +3,17 @@ import 'vditor/dist/index.css';
 import React, { MutableRefObject, useEffect, useRef } from 'react';
 
 type Props = {
-  value: string | undefined;
-  mde: string | undefined;
+  value: string;
+  mde: string;
 };
 
 function MDEditor({ value, mde }: Props) {
   const preview = useRef() as MutableRefObject<HTMLInputElement>;
 
   useEffect(() => {
-    if (!mde || !preview || !value || !preview.current) return;
+    if (!mde || !preview || !value || !preview.current) {
+      return;
+    }
 
     const render = async () => {
       await Vditor.preview(preview.current!, value, {
