@@ -145,11 +145,10 @@ export const Market = ({ info, setInfo }: PageProps) => {
       <div className="w-full">
         <div className="relative px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 pt-10">
           {info?.role === 'admin' && (
-            <Link
-              className="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
-              href="/additem"
-            >
-              添加商品
+            <Link href="/additem">
+              <a className="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100">
+                添加商品
+              </a>
             </Link>
           )}
         </div>
