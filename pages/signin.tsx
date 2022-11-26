@@ -1,7 +1,7 @@
 import React, { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { postSignin } from '@api/api';
+import { getUserInfo, postSignin } from '@api/api';
 import { toast } from 'react-toastify';
 import { UserInfo } from '@interfaces/UserInfo';
 
@@ -35,6 +35,19 @@ export default function Signin({ setUserEmail, setInfo }: Props) {
       setTimeout(() => {
         router.push('/');
       }, 500);
+      getUserInfo()
+        .then((res) => {
+          if (res.data.code === 401) {
+            toast.error('登录失败');
+            return;
+          } else {
+            setInfo(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error('发生错误');
+        });
     }
   };
 

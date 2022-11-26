@@ -73,7 +73,7 @@ export async function postSignin(email: string, password: string) {
 
 export async function getUserInfo() {
   const response = await API.get<UserResponse>('user/info');
-  return response.data.data;
+  return response;
 }
 
 export async function userLogout() {

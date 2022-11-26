@@ -3,6 +3,7 @@ import { getList } from '@api/api';
 import router from 'next/router';
 import { ItemInfo } from '@interfaces/Items';
 import { toast, ToastContainer } from 'react-toastify';
+import { UserInfo } from '@interfaces/UserInfo';
 
 type CardInfo = {
   title: string;
@@ -44,7 +45,11 @@ const BriefCard = ({ title, content, id }: CardInfo) => {
   );
 };
 
-export const Market = () => {
+type PageProps = {
+  info: UserInfo;
+};
+
+export const Market = ({ info }: PageProps) => {
   const [posts, setPosts] = useState<ItemInfo[] | null>();
 
   useEffect(() => {
@@ -71,6 +76,14 @@ export const Market = () => {
       />
       <div className="w-full">
         <div className="relative px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+          {info.role === 'admin' && (
+            <a
+              className="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
+              href="/additem"
+            >
+              添加商品
+            </a>
+          )}
           <div className="relative grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {posts &&
               posts.map((post, _idx) => (

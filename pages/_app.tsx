@@ -9,29 +9,30 @@ import { UserInfo } from '@interfaces/UserInfo';
 import { toast, ToastContainer } from 'react-toastify';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string>('');
   const [message, setMessage] = useState('');
-  const [info, setInfo] = useState<UserInfo | null>(null);
-
-  const getInfo = async () => {
-    const res = await getUserInfo();
-    return res;
-  };
+  const [info, setInfo] = useState<UserInfo>();
 
   useEffect(() => {
-    if (localStorage.getItem('user_email')) {
-      setUserEmail(localStorage.getItem('user_email'));
+    const user_email = localStorage.getItem('user_email');
+    if (user_email) {
+      setUserEmail(user_email);
       // http cannot set cookie
-      // getInfo()
-      //   .then((info) => {
-      //     setInfo(info);
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //     toast.error('发生错误');
-      //   });
+      getUserInfo()
+        .then((res) => {
+          if (res.data.code === 401) {
+            toast.error('登录失败');
+            return;
+          } else {
+            setInfo(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error('发生错误');
+        });
     } else {
-      setUserEmail(null);
+      setUserEmail('');
     }
   }, []);
 
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Nav
           info={info}
           setInfo={setInfo}
+          userEmail={userEmail}
           setUserEmail={setUserEmail}
           message={message}
           setMessage={setMessage}
@@ -61,9 +63,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component
           {...pageProps}
           info={info}
+          setInfo={setInfo}
           userEmail={userEmail}
           setUserEmail={setUserEmail}
-          setInfo={setInfo}
         />
       </div>
     </>

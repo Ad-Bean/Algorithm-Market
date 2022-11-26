@@ -11,7 +11,8 @@ import SuccessSnackBar from './SuccessSnackBar';
 import { toast } from 'react-toastify';
 
 type Props = {
-  info: UserInfo | null;
+  info: UserInfo | undefined;
+  userEmail: string;
   setInfo: Function;
   setUserEmail: Function;
   message: string;
