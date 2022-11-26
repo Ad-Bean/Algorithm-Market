@@ -89,9 +89,9 @@ export default function Post(props: Props) {
               <Link href={`/edititem/${id}`}>
                 <a
                   rel="noopener noreferrer"
-                  className="text-sm px-3 py-1 rounded-sm hover:underline dark:bg-violet-400 dark:text-gray-200"
+                  className="text-sm px-3 py-0 leading-[48px] rounded-sm hover:underline text-indigo-700 hover:text-indigo-300"
                 >
-                  编辑
+                  编辑商品
                 </a>
               </Link>
             </div>
