@@ -10,6 +10,7 @@ import MDPreview from '@components/MDPreview';
 import { UserInfo } from '@interfaces/UserInfo';
 import { ItemInformation } from '@interfaces/Items';
 import Playground from '@components/Playground';
+import { toast } from 'react-toastify';
 
 // export async function getStaticPaths() {
 //   const res = await getList();
@@ -61,7 +62,8 @@ export default function Post({ info: userInfo }: Props) {
         const ret = await getItem(parseInt(id[0]));
         setItemInfo(ret);
       } catch (err) {
-        setMessage((err as Error).message);
+        console.error(err);
+        toast.error('获取物品失败');
       }
     };
 
