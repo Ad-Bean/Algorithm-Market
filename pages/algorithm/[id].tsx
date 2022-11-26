@@ -47,8 +47,7 @@ type Props = {
   // post: ItemInformation;
 };
 
-export default function Post(props: Props) {
-  const { info: userInfo } = props;
+export default function Post({ info: userInfo }: Props) {
   const router = useRouter();
   const { id } = router.query;
   const [itemInfo, setItemInfo] = useState<ItemInformation>();
@@ -86,7 +85,7 @@ export default function Post(props: Props) {
           <div className="space-y-6">
             <div className="flex flex-col justify-between">
               <h1 className="text-4xl font-bold md:tracking-tight md:text-5xl">{itemInfo?.name}</h1>
-              {userInfo.role === 'admin' && (
+              {userInfo?.role === 'admin' && (
                 <Link href={`/edititem/${id}`}>
                   <a
                     rel="noopener noreferrer"
