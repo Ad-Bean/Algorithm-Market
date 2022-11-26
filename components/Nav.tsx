@@ -69,13 +69,15 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
                 </h2>
 
                 <ul className="flex items-center gap-6 text-base space-x-4">
-                  <li>
-                    <Link href="/algorithm">
-                      <a className="font-medium tracking-wide text-gray-600 transition-colors duration-200 hover:text-deep-purple-accent-400">
-                        算法
-                      </a>
-                    </Link>
-                  </li>
+                  {/* {info?.role === 'admin' && (
+                    <li>
+                      <Link href="/additem">
+                        <a className="font-medium tracking-wide text-gray-600 transition-colors duration-200 hover:text-deep-purple-accent-400">
+                          添加
+                        </a>
+                      </Link>
+                    </li>
+                  )} */}
                   <li>
                     <Link href="/market">
                       <a className="font-medium tracking-wide text-gray-600 transition-colors duration-200 hover:text-deep-purple-accent-400">
@@ -83,13 +85,13 @@ export const Nav = ({ info, setInfo, setUserEmail, message, setMessage }: Props)
                       </a>
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link href="/pricing">
                       <a className="font-medium tracking-wide text-gray-600 transition-colors duration-200 hover:text-deep-purple-accent-400">
                         价格
                       </a>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="/about">
                       <a className="font-medium tracking-wide text-gray-600 transition-colors duration-200 hover:text-deep-purple-accent-400">
