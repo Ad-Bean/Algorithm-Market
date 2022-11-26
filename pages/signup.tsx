@@ -81,8 +81,14 @@ export default function Signup({ setUserEmail, setInfo }: Props) {
                       id="avatar"
                       className="hidden w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-700"
                       onChange={(e) => {
+                        e.preventDefault();
                         if (!e.target.files) return;
                         setAvatar(e.target.files[0]);
+                        const reader = new FileReader();
+                        reader.readAsDataURL(e.target.files[0]);
+                        reader.onloadend = () => {
+                          setAvatarb64(reader.result as string);
+                        };
                       }}
                     />
                   </label>
