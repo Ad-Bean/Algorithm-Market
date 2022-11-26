@@ -86,14 +86,16 @@ export default function Post(props: Props) {
           <div className="space-y-6">
             <div className="flex flex-row justify-between">
               <h1 className="text-4xl font-bold md:tracking-tight md:text-5xl">{itemInfo?.name}</h1>
-              <Link href={`/edititem/${id}`}>
-                <a
-                  rel="noopener noreferrer"
-                  className="text-sm px-3 py-0 leading-[48px] rounded-sm hover:underline text-indigo-700 hover:text-indigo-300"
-                >
-                  编辑商品
-                </a>
-              </Link>
+              {userInfo.role === 'admin' && (
+                <Link href={`/edititem/${id}`}>
+                  <a
+                    rel="noopener noreferrer"
+                    className="text-sm px-3 py-0 leading-[48px] rounded-sm hover:underline text-indigo-700 hover:text-indigo-300"
+                  >
+                    编辑商品
+                  </a>
+                </Link>
+              )}
             </div>
             <div className="flex flex-wrap space-x-2 ">
               {itemInfo &&
