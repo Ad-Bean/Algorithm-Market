@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { getItem } from '@api/api';
+import { getItem, getList } from '@api/api';
 import SnackBar from '@components/SuccessSnackBar';
 import MDEditor from '@components/MDEditor';
 import Image from 'next/image';
@@ -11,11 +11,44 @@ import { UserInfo } from '@interfaces/UserInfo';
 import { ItemInformation } from '@interfaces/Items';
 import Playground from '@components/Playground';
 
+// export async function getStaticPaths() {
+//   const res = await getList();
+//   const paths = res.map((post) => ({
+//     params: { id: post.id },
+//   }));
+
+//   return {
+//     paths,
+//     fallback: true,
+//   };
+// }
+
+// type ItemProps = {
+//   params: {
+//     id: number;
+//   };
+// };
+
+// export async function getStaticProps(props: ItemProps) {
+//   const {
+//     params: { id },
+//   } = props;
+
+//   const post = await getItem(id);
+
+//   return {
+//     props: { post },
+//     revalidate: 60,
+//   };
+// }
+
 type Props = {
   info: UserInfo;
+  // post: ItemInformation;
 };
 
-const Post = ({ info: userInfo }: Props) => {
+export default function Post(props: Props) {
+  const { info: userInfo } = props;
   const router = useRouter();
   const { id } = router.query;
   const [itemInfo, setItemInfo] = useState<ItemInformation | null>(null);
@@ -51,7 +84,9 @@ const Post = ({ info: userInfo }: Props) => {
       <div onClick={closeSnackBar} className="max-w-2xl px-6 py-10 mx-auto space-y-12">
         <article className="space-y-8 dark:text-black">
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold md:tracking-tight md:text-5xl">{itemInfo?.name}</h1>
+            <div className="flex flex-row justify-between">
+              <h1 className="text-4xl font-bold md:tracking-tight md:text-5xl">{itemInfo?.name}</h1>
+            </div>
             <div className="flex flex-wrap space-x-2 ">
               {itemInfo &&
                 itemInfo.tag.map((t, idx) => {
@@ -87,11 +122,7 @@ const Post = ({ info: userInfo }: Props) => {
             <TextCardLoading title="简介：" content={itemInfo?.brief} />
             <TextCardLoading title="介绍：" content={undefined} />
 
-            {userInfo?.role === 'admin' ? (
-              <MDPreview value={itemInfo?.introduce} mde={itemInfo?.name} />
-            ) : (
-              <MDEditor value={itemInfo?.introduce} mde={itemInfo?.name} />
-            )}
+            <MDPreview value={itemInfo?.introduce} mde={itemInfo?.name} />
 
             <p className="text-xl my-2">算法：</p>
 
@@ -121,9 +152,7 @@ const Post = ({ info: userInfo }: Props) => {
       </div>
     </>
   );
-};
-
-export default Post;
+}
 
 type TextCard = {
   title: string;

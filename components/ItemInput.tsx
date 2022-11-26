@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { postInput } from "@api/api";
-import { toast, ToastContainer } from "react-toastify";
-import { Output } from "@interfaces/Input";
+/* eslint-disable @next/next/no-img-element */
+import React, { useState } from 'react';
+import { postInput } from '@api/api';
+import { toast, ToastContainer } from 'react-toastify';
+import { Output } from '@interfaces/Input';
 
 type Props = {
   input: string[] | undefined;
@@ -14,7 +15,7 @@ export default function ItemInput({ input, itemId }: Props) {
 
   const getOutput = async (inp: string, idx: number) => {
     if (!itemId) {
-      toast.error("提交错误，ID 错误");
+      toast.error('提交错误，ID 错误');
       return;
     }
     const prevState = [...loading];
@@ -31,7 +32,7 @@ export default function ItemInput({ input, itemId }: Props) {
       prevState[idx] = false;
       setLoading(prevState);
     } else {
-      toast.success("提交成功");
+      toast.success('提交成功');
 
       const prev = [...output];
       prev[idx] = res.data!;

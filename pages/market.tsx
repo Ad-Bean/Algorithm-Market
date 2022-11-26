@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { deleteItem, getList } from '@api/api';
+import { deleteItem, getList, getUserInfo } from '@api/api';
 import router from 'next/router';
 import { ItemInfo } from '@interfaces/Items';
 import { toast, ToastContainer } from 'react-toastify';
 import { UserInfo } from '@interfaces/UserInfo';
-import IconButton from '@components/IconButton';
-import ExitIcon from '@components/ExitIcon';
 import Confirm from '@components/Confirm';
 
 type CardInfo = {
@@ -76,9 +74,10 @@ const BriefCard = ({ info, title, content, id, setCurId, setConfirmOpen }: CardI
 
 type PageProps = {
   info: UserInfo;
+  setInfo: Function;
 };
 
-export const Market = ({ info }: PageProps) => {
+export const Market = ({ info, setInfo }: PageProps) => {
   const [posts, setPosts] = useState<ItemInfo[] | null>();
 
   useEffect(() => {
@@ -115,6 +114,12 @@ export const Market = ({ info }: PageProps) => {
       .finally(() => setCurId(-1));
   };
 
+  useEffect(() => {
+    if (!info?.role) {
+      router.push('/');
+    }
+  }, [info]);
+
   return (
     <>
       <ToastContainer
@@ -138,7 +143,7 @@ export const Market = ({ info }: PageProps) => {
       </div>
       <div className="w-full">
         <div className="relative px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 pt-10">
-          {info.role === 'admin' && (
+          {info?.role === 'admin' && (
             <a
               className="relative font-medium text-indigo-600 before:absolute before:-bottom-1 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-indigo-600 before:transition hover:before:scale-100"
               href="/additem"

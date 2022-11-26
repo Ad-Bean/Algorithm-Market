@@ -11,7 +11,6 @@ type Props = {
   tag: string[];
 };
 
-// TODO: picture
 function Card({ role, id, brief, name, picture, tag }: Props) {
   const router = useRouter();
 
