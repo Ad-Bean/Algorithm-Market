@@ -84,7 +84,7 @@ export default function Post(props: Props) {
       <div onClick={closeSnackBar} className="max-w-2xl px-6 py-10 mx-auto space-y-12">
         <article className="space-y-8 dark:text-black">
           <div className="space-y-6">
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col justify-between">
               <h1 className="text-4xl font-bold md:tracking-tight md:text-5xl">{itemInfo?.name}</h1>
               {userInfo.role === 'admin' && (
                 <Link href={`/edititem/${id}`}>
@@ -92,7 +92,7 @@ export default function Post(props: Props) {
                     rel="noopener noreferrer"
                     className="text-sm px-3 py-0 leading-[48px] rounded-sm hover:underline text-indigo-700 hover:text-indigo-300"
                   >
-                    编辑商品
+                    编辑
                   </a>
                 </Link>
               )}
