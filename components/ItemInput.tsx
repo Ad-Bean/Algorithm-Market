@@ -127,7 +127,7 @@ type ResultProps = {
 
 const ResultCard = ({ src, text }: ResultProps) => (
   <div className="block overflow-hidden rounded-2xl my-4 w-full">
-    <img className="object-cover w-full h-24" src={`data:image/jpeg;base64,${src}`} alt="" />
+    <img className="object-cover w-full" src={`data:image/jpeg;base64,${src}`} alt="" />
 
     <div className="p-4 bg-gray-900 my-4">
       <p className="mt-1 text-xs text-gray-500">{text}</p>
