@@ -385,7 +385,12 @@ function AddItem({}: Props) {
                   className="w-full rounded-lg border-gray-200 p-3 text-sm"
                   placeholder="代码"
                   rows={8}
-                  id="message"
+                  id="code"
+                  value={code}
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setCode(e.target.value);
+                  }}
                 ></textarea>
               </div>
 
