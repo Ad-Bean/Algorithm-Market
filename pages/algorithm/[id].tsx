@@ -59,7 +59,7 @@ export default function Post({ info: userInfo }: Props) {
 
     const getItems = async () => {
       try {
-        const ret = await getItem(parseInt(id));
+        const ret = await getItem(+id);
         setItemInfo(ret);
       } catch (err) {
         console.error(err);

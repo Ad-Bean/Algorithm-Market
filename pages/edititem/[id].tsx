@@ -38,7 +38,7 @@ function AddItem({}: Props) {
 
     const getItems = async () => {
       try {
-        const ret = await getItem(parseInt(id[0]));
+        const ret = await getItem(+id);
         setTags(ret.tag);
         setAvatarb64(ret.picture);
         fetch(ret.picture)
@@ -93,7 +93,7 @@ function AddItem({}: Props) {
     };
 
     if (id) {
-      putItem(parseInt(id[0]), payload)
+      putItem(+id, payload)
         .then(() => {
           toast.success('修改记录成功');
         })
