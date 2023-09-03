@@ -5,14 +5,16 @@ import { UserResponse } from '@interfaces/UserInfo';
 import axios from 'axios';
 
 export const baseUrl = process.env.NEXT_PUBLIC_PRODUCTION_ENV_VARIABLE;
+//export const baseUrl = "http://localhost:3001/api/"
 axios.defaults.withCredentials = true;
 
 const API = axios.create({
   baseURL: baseUrl,
-  timeout: 1000,
+  timeout: 10000,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
   },
 });
 
